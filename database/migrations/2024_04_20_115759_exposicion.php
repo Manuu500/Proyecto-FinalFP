@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('organizador');
             $table->integer('aforo');
-            $table->dateTime('fecha_inicio');
+            $table->date('fecha_inicio');
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

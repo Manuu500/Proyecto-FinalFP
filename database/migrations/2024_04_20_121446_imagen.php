@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('imagen', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_obra')->nullable();
+            $table->foreign('id_obra')->references('id')->on('obra')->onDelete('set null');
             $table->string('nombre_artista');
             $table->string('descripcion');
             $table->string('autor');
