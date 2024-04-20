@@ -13,15 +13,17 @@ return new class extends Migration
     {
         Schema::create('entrada', function (Blueprint $table) {
             $table->id();
-            $table->integer('num_entrada');
+            $table->string('num_entrada');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('expo_id');
             $table->string('tipo');
             $table->dateTime('fecha_hora_visita')->nullable();
             $table->dateTime('fecha_hora_fin')->nullable();
             $table->dateTime('fecha_compra')->nullable();
-            $table->string('met_pago');
+            $table->string('metodo_pago');
             $table->string('observaciones')->nullable();
             $table->foreign('user_id')->references("id")->on("users");
+            $table->foreign('expo_id')->references("id")->on("exposicion");
             $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();

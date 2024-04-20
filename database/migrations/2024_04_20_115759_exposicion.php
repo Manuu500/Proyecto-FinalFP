@@ -13,8 +13,6 @@ return new class extends Migration
     {
         Schema::create('exposicion', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_entrada')->nullable();
-            $table->foreign('id_entrada')->references('id')->on('entrada')->onDelete("set null");
             $table->string('organizador');
             $table->integer('aforo');
             $table->dateTime('fecha_inicio');
