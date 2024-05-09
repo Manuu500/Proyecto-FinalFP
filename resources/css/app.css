@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.boton_entradas:hover {
+    border-radius: 0; /* Elimina los bordes redondeados */
+    background-color: transparent; /* Hace que el fondo sea transparente */
+    border: 1px solid currentColor; /* Agrega un borde de 1px del mismo color que el texto */
+    color: black; /* Cambia el color del texto si es necesario */
+}
