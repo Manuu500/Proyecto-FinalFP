@@ -20,42 +20,51 @@
         }
 
         .div-fondo {
-            filter: brightness(0.7);
+            /* filter: brightness(0.7); */
             width: 100%;
             height: 80vh;
-            background-image: url('../imagenes/Museo.jpg');
+            background-image: url('../imagenes/Museo2.png');
             background-size: cover;
             background-position: center;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative; /* Asegura que el z-index funcione */
             color: cornflowerblue;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             -webkit-text-stroke: 0.5px black; /* Para navegadores WebKit (Safari, Chrome, etc.) */
+            transition: background-size 0.3s ease;
+            background-size: 100%;
+        }
+
+        .div-fondo:hover {
+            background-size: 110%; /* Hacer zoom en la imagen al pasar el ratón */
         }
 
 
         .div-obras {
-            content: ""; /* Crea un pseudo-elemento para aplicar el filtro de brillo solo a la imagen */
             /* filter: brightness(0.7); */
-            background-image: url('../imagenes/persistencia_de_la_memoria_obra.png');
+            background-image: url('../imagenes/persistencia.png');
             display: flex;
             justify-content: center;
             align-items: center;
             width: 50%;
             height: 60vh;
             background-color: aqua;
-            z-index: -1;
             color: cornflowerblue;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             -webkit-text-stroke: 0.5px black; /* Para navegadores WebKit (Safari, Chrome, etc.) */
+            transition: background-size 0.3s ease;
+            background-size: 100%;
+        }
+
+        .div-obras:hover {
+            background-size: 110%;
+            cursor: pointer !important;
         }
 
         .div-expos{
-            content: ""; /* Crea un pseudo-elemento para aplicar el filtro de brillo solo a la imagen */
             /* filter: brightness(0.7); */
-            background-image: url('../imagenes/escultura.jpg');
+            background-image: url('../imagenes/perro_exposicion.png');
             display: flex;
             justify-content: center;
             align-items: center;
@@ -65,9 +74,37 @@
             color: cornflowerblue;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             -webkit-text-stroke: 0.5px black; /* Para navegadores WebKit (Safari, Chrome, etc.) */
+            transition: background-size 0.3s ease;
+            background-size: 100%;
         }
 
+        .div-expos:hover{
+            background-size: 110%;
+            cursor: pointer !important;
+        }
 
+        .div-aboutus{
+            /* filter: brightness(0.7); */
+            background-color: aquamarine;
+            background-image: url('../imagenes/exposicionfamosa.png');
+            width: 100%;
+            height: 70vh;
+            background-color: aqua;
+            color: cornflowerblue;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            -webkit-text-stroke: 0.5px black; /* Para navegadores WebKit (Safari, Chrome, etc.) */
+            background-size: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-size 0.3s ease;
+            background-size: 100%;
+        }
+
+        .div-aboutus:hover{
+            background-size: 110%;
+            cursor: pointer !important;
+        }
 
         #boton_entradas {
             height: 8vh;
@@ -105,35 +142,42 @@
 <section class="div-fondo">
     <div class="row">
         <div class="col-sm-12 align-items-center">
-            <h1 class="text-center">Bienvenidos!</h1>
-            <h2 class="text-center ">Horario: 8:00am - 12:30am / 16:00pm - 22:00pm</h2>
+            <h1 class="texto text-center">Bienvenidos!</h1>
+            <h2 class="texto text-center ">Horario: 8:00am - 12:30am / 16:00pm - 22:00pm</h2>
         </div>
     </div>
 </section>
 
+<!-- CONTENIDOS -->
 <section class="div-servicios">
     <div class="row">
-        <div class="div-obras text-center col-sm-6">
-            <div class="row">
-                <div class="col">
-                    <h1>Obras</h1>
-                    <h2>En esta sección podrá consultar todas las obras existentes en nuestro museo.</h2>
+        <div class="div-obras text-center col-sm-6" onclick="location.href='url_destino';">
+                <div class="row">
+                    <div class="col">
+                        <h1>Obras</h1>
+                        <h2>En esta sección podrá consultar todas las obras existentes en nuestro museo.</h2>
+                    </div>
                 </div>
-            </div>
         </div>
-        <div class="div-expos text-center col-sm-6">
-        <div class="row">
-                <div class="col">
-                    <h1>Exposiciones</h1>
-                    <h2>Aquí podrás consultar todas las exposiciones disponibles.</h2>
+        <div class="div-expos text-center col-sm-6" onclick="location.href='url_destino';">
+                <div class="row">
+                    <div class="col">
+                        <h1>Exposiciones</h1>
+                        <h2>Aquí podrás consultar todas las exposiciones disponibles.</h2>
+                    </div>
                 </div>
-            </div>
         </div>
     </div>
 </section>
-<!-- CONTENIDO DE LA PÁGINA -->
-<div style="height: 2000px; background-color: #f2f2f2;"> <!-- Simula contenido para hacer scroll -->
-</div>
+
+<section class="div-aboutus">
+    <div class="col">
+        <div class="row-sm-12">
+            <h1 class="text-center">Sobre Nosotros</h1>
+            <h2 class="text-center">Aquí encontrarás todo sobre nuestro museo, nuestra historia, localización y mucho más!</h2>
+        </div>
+    </div>
+</section>
 
 
 
