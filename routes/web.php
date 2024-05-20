@@ -5,7 +5,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
-});
+})->name('index');
+
+Route::get('/entradas' , function () {
+    return view('entradas');
+})->name('entradas');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

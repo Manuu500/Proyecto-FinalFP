@@ -5,6 +5,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <title>Museo Arte Pictórico</title>
     <link rel="stylesheet" href="..\resources\css\app.css">
 
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -131,7 +132,7 @@
             <h1 class="text-center">MUSEO ARTE PICTÓRICO</h1>
         </div>
         <div class="col text-end">
-        <button id="boton_entradas" type="button" class="boton_entradas btn btn-lg">
+        <button id="boton_entradas" type="button" class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('entradas') }}'">
             <label>Entradas</label>
             <img class="ml-2" width="30px" height="30px" src="../imagenes/ticketazul.png"/>
         </button>
