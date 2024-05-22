@@ -11,6 +11,10 @@ Route::get('/entradas' , function () {
     return view('entradas');
 })->name('entradas');
 
+Route::get('/comprar_entradas' , function () {
+    return view('comprar_entradas');
+})->name('comprar_entradas');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
