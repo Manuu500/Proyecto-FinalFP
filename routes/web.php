@@ -21,7 +21,12 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 //Ruta para comprar las entradas
-Route::post('/guardar-entrada', [EntradaController::class, 'store'])->name('entrada.store');
+Route::post('/guardar-entrada', [EntradaController::class, 'store'])->name('entradas.store');
+
+//Ruta para ir al sobre nosotros
+Route::get('/sobrenosotros' , function () {
+    return view('sobrenosotros');
+})->name('sobrenosotros');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

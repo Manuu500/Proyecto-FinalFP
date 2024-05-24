@@ -41,7 +41,7 @@
             color: black;
         }
     </style>
-    <title>Log In</title>
+    <title>Comprar entradas</title>
 </head>
 <body style="background-color: #fbf2d5;">
     <div class="container d-flex flex-column align-items-center justify-content-center" style="height: 100vh;">

@@ -160,7 +160,7 @@
                     </div>
                 </div>
         </div>
-        <div class="div-expos text-center col-sm-6" onclick="location.href='url_destino';">
+        <div class="div-expos text-center col-sm-6">
                 <div class="row">
                     <div class="col">
                         <h1>Exposiciones</h1>
@@ -171,7 +171,7 @@
     </div>
 </section>
 
-<section class="div-aboutus">
+<section class="div-aboutus" onclick="location.href='{{route('sobrenosotros')}}';">
     <div class="col">
         <div class="row-sm-12">
             <h1 class="text-center">Sobre Nosotros</h1>
