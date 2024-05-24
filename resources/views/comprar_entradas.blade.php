@@ -49,27 +49,28 @@
         <h1 class="mb-4">Introducir datos de la compra</h1>
         <div class="card" style="width: 34rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             <div class="card-body d-flex flex-column align-items-center justify-content-center">
-                <form method="POST" action="" class="w-75">
+                <form method="POST" action="{{ route('entradas.store') }}" class="w-75">
                     @csrf
 
                     <!-- Número de entradas -->
                     <div class="mb-3 mt-4 entry-control">
-                        <p class="mb-0" style="font-size: 20px"><h4>Número de entradas:</h4></p>
+                        <h4>Número de entradas:</h4>
                         <img id="minusButton" class="imagen-menos" width="20px" height="20px" src="../imagenes/minus-sign.png" alt="Minus"/>
-                        <label id="entryCount" class="mx-3"><b>1</b></label>
+                        <label id="entryCount" class="mx-3"><strong>1</strong></label>
+                        <input type="hidden" name="num_entrada" id="numeroEntradas" value="1">
                         <img id="plusButton" class="imagen-mas" width="20px" height="20px" src="../imagenes/plus.png" alt="Plus"/>
                     </div>
 
-                    <!-- Hora de llegada -->
+                    <!-- Fecha de visita -->
                     <div class="mb-3 mt-4 entry-control">
-                        <p class="mb-0" style="font-size: 20px"><h4>¿Que día desea venir?</h4></p>
-                        <input type="date" name="fechaEntrada" class="form-control">
+                        <h4>¿Qué día desea venir?</h4>
+                        <input type="date" name="fecha_hora_visita" class="form-control">
                     </div>
 
                     <!-- Método pago -->
                     <div class="mb-3">
                         <h4>Método de pago:</h4>
-                        <select id="metodoPago" name="metodo" class="form-control">
+                        <select id="metodoPago" name="metodo_pago" class="form-control">
                             <option value="--">---</option>
                             <option value="PayPal">PayPal</option>
                             <option value="Tarjeta">Tarjeta</option>
@@ -79,22 +80,21 @@
                     <!-- Número de cuenta PayPal (dinámico) -->
                     <div id="campoPayPal" class="mb-3" style="display: none;">
                         <h4>Dirección de correo electrónico a pagar:</h4>
-                        <input type="text" name="cuentaPayPal" class="form-control" value="museoartepictorico@gmail.org" readonly>
+                        <input type="text" name="cuenta_paypal" class="form-control" value="museoartepictorico@gmail.org" readonly>
                     </div>
 
                     <!-- Datos de tarjeta de crédito (dinámico) -->
                     <div id="campoTarjeta" class="mb-3" style="display: none;">
                         <h4>Número de tarjeta:</h4>
-                        <input type="text" name="numeroTarjeta" class="form-control">
+                        <input type="text" name="numero_tarjeta" class="form-control">
                         <h4>Fecha de caducidad:</h4>
-                        <input type="text" name="fechaCaducidad" class="form-control">
+                        <input type="text" name="fecha_caducidad" class="form-control">
                         <h4>CVV:</h4>
                         <input type="text" name="cvv" class="form-control">
                     </div>
 
-                    <button id="boton_entradas" type="button" class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('comprar_entradas') }}'">
-                        <label>Comprar</label>
-                    </button>
+
+                    <input type="submit" id="boton_entradas" type="button" class="boton_entradas btn btn-lg" value="Comprar"></input>
                     <label><b>Precio:</b> 14,99$</label>
                 </form>
             </div>
