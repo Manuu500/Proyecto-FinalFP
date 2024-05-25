@@ -77,6 +77,7 @@
     </div>
 </header>
 
+
 <div class="divTexto div d-flex justify-content-center align-items-center">
     <div class="row">
         <div class="col">
@@ -103,9 +104,15 @@
                         <div class="card-body align-items-center">
                             <p class="card-text">Incluye acceso a todas las exposiciones disponibles. </p>
                             <p><b>PRECIO:</b> 14,99$</p>
-                            <button id="boton_entradas" type="button" class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('comprar_entradas') }}'">
-                                <label>Comprar</label>
-                            </button>
+                            @auth
+                                <button id="boton_entradas" type="button" class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('comprar_entradas') }}'">
+                                    <label>Comprar</label>
+                                </button>
+                            @else
+                                <button id="boton_entradas" type="button" class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('login') }}'">
+                                    <label>Comprar</label>
+                                </button>
+                            @endauth
                             <p style="font-size: 12px; color: grey;" class="mt-3">La entrada caduca en un plazo de 1 año</p>
                         </div>
                     </div>

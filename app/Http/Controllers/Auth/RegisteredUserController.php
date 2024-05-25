@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Carbon\Carbon;
+
 
 class RegisteredUserController extends Controller
 {
@@ -30,14 +32,28 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+            'dni' => 'required',
+            'nombre' => ['required', 'string', 'max:255'],
+             'apellido1' => ['required', 'string', 'max:255'],
+             'apellido2' => ['required', 'string', 'max:255'],
+             'telefono' => ['required','string'],
+             'fecha_nacimiento' => 'required',
+             'cod_postal' => 'required',
+             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+         ]);
+
 
         $user = User::create([
-            'name' => $request->name,
+            'dni' => $request->dni,
+            'nombre' => $request->nombre,
+            'apellido1' => $request->apellido1,
+            'apellido2' => $request->apellido2,
+            'telefono' => $request->telefono,
+            'fechaNacimiento' => $request->fecha_nacimiento,
             'email' => $request->email,
+            'codPostal' => $request->cod_postal,
+            'tipo' => 'cliente',
             'password' => Hash::make($request->password),
         ]);
 
@@ -45,6 +61,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        return redirect(route('index', absolute: false));
     }
 }

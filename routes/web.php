@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EntradaController;
+use App\Http\Controllers\ModalController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -14,11 +16,17 @@ Route::get('/entradas' , function () {
 
 Route::get('/comprar_entradas' , function () {
     return view('comprar_entradas');
-})->name('comprar_entradas');
+})->name('comprar_entradas')->middleware('auth');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+// Route::post('/cerrar-modal', [ModalController::class, 'cerrarModal'])->name('cerrar.modal');
+
+
 
 //Ruta para comprar las entradas
 Route::post('/guardar-entrada', [EntradaController::class, 'store'])->name('entradas.store');

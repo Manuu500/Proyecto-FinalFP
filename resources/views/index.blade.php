@@ -5,6 +5,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <title>Museo Arte Pictórico</title>
     <link rel="stylesheet" href="..\resources\css\app.css">
 
@@ -119,24 +122,48 @@
             background-image: url('../imagenes/ticketnegro.png'); /* Nueva imagen para el hover */
             background-color: cornflowerblue;
             color: black;
+        }
+
+        .boton_entradas {
+            height: 8vh;
+            border-radius: 0;
+            background-color: transparent;
+            border: 1px solid cornflowerblue;
+            color: cornflowerblue;
+        }
+
+        .boton_entradas:hover {
+            background-image: url('../imagenes/ticketnegro.png'); /* Nueva imagen para el hover */
+            background-color: cornflowerblue;
+            color: black;
 
         }
     </style>
 </head>
 <body>
 
+
 <!-- HEADER -->
 <header class="container-flex">
     <div class="row m-4 align-items-center">
-        <div class="col-sm-7 mx-auto d-flex justify-content-end">
+        <div class="col-sm-4 mx-auto d-flex justify-content-end">
             <h1 class="text-center">MUSEO ARTE PICTÓRICO</h1>
         </div>
-        <div class="col text-end">
-        <button id="boton_entradas" type="button" class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('entradas') }}'">
-            <label>Entradas</label>
-            <img class="ml-2" width="30px" height="30px" src="../imagenes/ticketazul.png"/>
-        </button>
+        <div class="col-sm-8 text-end">
+            <div class="btn-group" role="group" aria-label="Botones">
+                @auth
+                <form id="formCerrarSesion" method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button id="botonCerrarSesion" type="submit" class="btn btn-lg boton_entradas">Cerrar sesión</button>
+                </form>
+                @endauth
+                <button id="boton_entradas" type="button" class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('entradas') }}'">
+                    <label>Entradas</label>
+                    <img class="ml-2" width="30px" height="30px" src="../imagenes/ticketazul.png"/>
+                </button>
+            </div>
         </div>
+
     </div>
 </header>
 
@@ -179,6 +206,46 @@
         </div>
     </div>
 </section>
+
+
+<!-- Modal de Bienvenida -->
+<div class="modal fade" id="bienvenidaModal" tabindex="-1" aria-labelledby="bienvenidaModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="bienvenidaModalLabel">Bienvenido</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ¡Gracias por registrarte en nuestro sitio!
+        </div>
+        <div class="modal-footer">
+          <button id="botonCerrarModal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+@if (Auth::check())
+<script>
+
+    var botonCerrar = document.getElementById("botonCerrarModal");
+    var myModal = new bootstrap.Modal(document.getElementById('bienvenidaModal'));
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+        myModal.show();
+    });
+
+    botonCerrar.addEventListener('click', function(){
+        myModal.hide();
+    });
+
+    document.addEventListener
+</script>
+@endif
 
 
 
