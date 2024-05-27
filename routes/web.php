@@ -5,6 +5,8 @@ use App\Http\Controllers\EntradaController;
 use App\Http\Controllers\ModalController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ExposicionController;
+
 
 Route::get('/', function () {
     return view('index');
@@ -22,7 +24,13 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/listar_exposiciones' , function () {
+    return view('listar_exposiciones');
+})->name('listar_exposiciones');
+
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+Route::get('/listar_exposiciones', [ExposicionController::class, 'index'])->name('listar_exposiciones');
 
 // Route::post('/cerrar-modal', [ModalController::class, 'cerrarModal'])->name('cerrar.modal');
 

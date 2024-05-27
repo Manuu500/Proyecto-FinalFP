@@ -187,7 +187,7 @@
                     </div>
                 </div>
         </div>
-        <div class="div-expos text-center col-sm-6">
+        <div class="div-expos text-center col-sm-6" onclick="location.href='{{route('listar_exposiciones')}}';">
                 <div class="row">
                     <div class="col">
                         <h1>Exposiciones</h1>

@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('exposicion', function (Blueprint $table) {
             $table->id();
             $table->string('organizador');
+            $table->string('nombre');
+            $table->string('descripcion');
             $table->integer('aforo');
             $table->date('fecha_inicio');
             $table->rememberToken();
