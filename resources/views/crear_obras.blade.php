@@ -4,13 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <link rel="icon" href="{{ asset('imagenes/patitas_solidarias.jpg') }}" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <title>Listar Exposiciones</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
-        /* Estilos para el encabezado */
-        .header {
+        .custom-bg-color {
+            background-color: #fbf2d5;
+        }
+
+         /* Estilos para el encabezado */
+         .header {
             background-color: transparent;
             position: fixed;
             top: 0;
@@ -137,77 +147,48 @@
             margin-right: 10px; /* Espacio entre botones */
         }
     </style>
+    <title>Log In</title>
 </head>
-<body>
-    <header class="container-fluid header">
-        <div class="row">
-            <div class="col-sm-12 d-flex">
-                <div class="d-flex flex-grow-1 justify-content-around align-items-center">
-                    <a href="{{ route('index') }}">
-                        <img class="m-2" width="100px" height="100px" src="../imagenes/blob-modified.png" />
-                    </a>
-                </div>
-            </div>
-        </div>
-    </header>
+<body style="background-color: #fbf2d5;">
+    <div class="container d-flex flex-column align-items-center justify-content-center" style="height: 100vh;">
+        <h1 class="mb-4">Crear obra</h1>
+        <div class="card" style="width: 34rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <div class="card-body d-flex flex-column align-items-center justify-content-center">
+                <!-- Session Status -->
+                <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
-
-    <div class="divTexto div d-flex justify-content-center align-items-center">
-        <div class="row">
-            <div class="col">
-                <h1 class="text-center">OBRAS</h1>
-                <h2 class="text-center">En esta sección podrá consultar todas las obras disponibles en nuestra página web.</h2>
-            </div>
-        </div>
-    </div>
-
-    <div class="bg-primary divEntradas py-5">
-        <div class="container">
-            @foreach ($obras as $obra)
-                <div class="row mb-4">
-                    <div class="divExpo bg-secondary w-100 p-4 rounded shadow-sm">
-                        <div class="row d-flex align-items-center justify-content-between">
-                            <div class="col-sm-3">
-                                <h4 class="text-center">
-                                    <img class="img-fluid rounded-circle" src="{{ asset('imagenes/' . $obra->foto) }}" alt="Exposition Image"/>
-                                </h4>
-                            </div>
-                            <div class="col">
-                                <div class="row mb-2">
-                                    <h2 class="text-center">{{ $obra->nombre }}</h2>
-                                </div>
-                                <div class="row">
-                                    <p class="text-center">{{ $obra->descripcion }}</p>
-                                </div>
-                                <div class="row botones-comprar-container">
-                                    <form action="{{ route('obra.destroy', $obra->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="boton_entradas_obra btn btn-lg" onclick="">Borrar Obra</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+                <form method="POST" action="{{route('crear_obras')}}" class="w-50">
+                    @csrf
+                    <!-- Nombre -->
+                    <div class="mb-3">
+                        <p style="font-size: 20px">Nombre</p>
+                        <x-text-input id="nombre" class="block mt-1 w-full" type="nombre" name="nombre" :value="old('nombre')" required autofocus autocomplete="nombre" />
+                        <x-input-error :messages="$errors->get('nombre')" class="mt-2" />
                     </div>
-                </div>
-            @endforeach
-            <button class="boton_entradas_obra_crear btn btn-lg" onclick="window.location.href='{{ route('crear_obras') }}'">Crear nueva obra</button>
-        </div>
-    </div>
-</body>
 
-<script>
-    document.querySelectorAll('form').forEach(form => {
-        form.addEventListener('submit', function(event) {
-            if (!confirm('¿Estás seguro de que deseas eliminar esta obra?')) {
-                event.preventDefault();
-            }
-        });
-    });
-</script>
-</html>
+                    <!-- Descripcion -->
+                    <div class="mb-3">
+                        <p style="font-size: 20px">Descripcion</p>
+                        <x-text-input id="descripcion" class="block mt-1 w-full" type="descripcion" name="descripcion" required autocomplete="descripcion" />
+                        <x-input-error :messages="$errors->get('descripcion')" class="mt-2" />
+                    </div>
+
+                    <!-- Artista -->
+                    <div class="mb-3">
+                        <p style="font-size: 20px">Artista</p>
+                        <x-text-input id="artista" class="block mt-1 w-full" type="artista" name="artista" required autocomplete="artista" />
+                        <x-input-error :messages="$errors->get('artista')" class="mt-2" />
+                    </div>
+
+                    <!-- Foto -->
+                    <div class="mb-3">
+                        <p style="font-size: 20px">Foto de la obra</p>
+                        <x-text-input id="foto" class="block mt-1 w-full" type="file" name="foto" required autocomplete="foto" />
+                        <x-input-error :messages="$errors->get('foto')" class="mt-2" />
+                    </div>
+
+                    <div class="mt-5">
+                        <input value="Crear nueva obra" type="submit" class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('crear_obras') }}'"></input>
+                    </div>
+                </form>
+            </div>

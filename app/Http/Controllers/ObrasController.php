@@ -13,7 +13,7 @@ class ObrasController extends Controller
      */
     public function index()
     {
-        $exposiciones = Obra::all();
+        $obras = Obra::all();
         return view('listar_obras', compact('obras'));
     }
 
@@ -30,7 +30,20 @@ class ObrasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $obra = Obra::create([
+            'nombre' => $request->nombre,
+            'descripcion' => $request->descripcion,
+            'artista' => $request->artista,
+            'foto' => $request->foto
+        ]);
+
+        //Depurar
+        // dd($entrada);
+        //Log::info('Datos validados:', $validatedData);
+
+        $obra->save();
+        return redirect()->route('listar_obras')->with('success', 'Compra realizada con éxito');
+
     }
 
     /**
@@ -62,6 +75,9 @@ class ObrasController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $obra = Obra::findOrFail($id);
+        $obra->delete();
+
+        return redirect()->route('listar_obras')->with('success', 'Obra eliminada correctamente');
     }
 }
