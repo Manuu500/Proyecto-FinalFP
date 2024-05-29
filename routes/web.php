@@ -6,6 +6,8 @@ use App\Http\Controllers\ModalController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExposicionController;
+use App\Http\Controllers\ObrasController;
+
 
 
 Route::get('/', function () {
@@ -30,11 +32,18 @@ Route::get('/listar_exposiciones' , function () {
 
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
+//Ruta para listar las exposiciones
 Route::get('/listar_exposiciones', [ExposicionController::class, 'index'])->name('listar_exposiciones');
+
+//Ruta para listar las obras
+Route::get('/listar_obras', [ObrasController::class, 'index'])->name('listar_obras');
 
 // Route::post('/cerrar-modal', [ModalController::class, 'cerrarModal'])->name('cerrar.modal');
 
+//Crear sesion que guarde el id de la exposicion a la que se ha clickeado en comprar
+Route::get('/comprar_entradas/{id}', [ExposicionController::class, 'crearSesionExposicion'])->name('comprar_entradas_directo')->middleware('auth');
 
+// Route::get('/comprar/{id}', [EntradaController::class, 'comprarDirecto'])->name('comprar_entradas_directo');
 
 //Ruta para comprar las entradas
 Route::post('/guardar-entrada', [EntradaController::class, 'store'])->name('entradas.store');

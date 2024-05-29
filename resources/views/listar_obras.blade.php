@@ -136,21 +136,21 @@
 
     <div class="bg-primary divEntradas py-5">
         <div class="container">
-            @foreach ($exposiciones as $exposicion)
+            @foreach ($obras as $obra)
                 <div class="row mb-4">
                     <div class="divExpo bg-secondary w-100 p-4 rounded shadow-sm">
                         <div class="row d-flex align-items-center justify-content-between">
                             <div class="col-sm-3">
                                 <h4 class="text-center">
-                                    <img class="img-fluid rounded-circle" src="../imagenes/blob-modified.png" alt="Exposition Image"/>
+                                    <img class="img-fluid rounded-circle" src="../imagenes/{{ $obra->foto }}" alt="Exposition Image"/>
                                 </h4>
                             </div>
                             <div class="col">
                                 <div class="row mb-2">
-                                    <h2 class="text-center">{{ $exposicion->nombre }}</h2>
+                                    <h2 class="text-center">{{ $obra->nombre }}</h2>
                                 </div>
                                 <div class="row">
-                                    <p class="text-center">{{ $exposicion->descripcion }}</p>
+                                    <p class="text-center">{{ $obra->descripcion }}</p>
                                 </div>
                                 <div class="row botones-comprar-container">
                                     @if (Auth::check())

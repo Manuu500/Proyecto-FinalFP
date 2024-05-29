@@ -2,21 +2,19 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
-use App\Models\Exposicion;
-use Illuminate\Support\Facades\Session;
+use App\Models\Obra;
 
 
-class ExposicionController extends Controller
+class ObrasController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $exposiciones = Exposicion::all();
-        return view('listar_exposiciones', compact('exposiciones'));
+        $exposiciones = Obra::all();
+        return view('listar_obras', compact('obras'));
     }
 
     /**
@@ -38,10 +36,9 @@ class ExposicionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(string $id)
     {
-        $exposition = Exposicion::findOrFail($id);
-        return view('expositions.show', compact('exposition'));
+        //
     }
 
     /**
@@ -66,13 +63,5 @@ class ExposicionController extends Controller
     public function destroy(string $id)
     {
         //
-    }
-
-    public function crearSesionExposicion($id)
-    {
-        Session::put('idExpo', $id);
-
-        // Redirigir a la vista de comprar entradas
-        return redirect()->route('comprar_entradas');
     }
 }
