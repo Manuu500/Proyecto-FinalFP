@@ -147,37 +147,44 @@
             margin-right: 10px; /* Espacio entre botones */
         }
     </style>
-    <title>Crear Obra</title>
+    <title>Crear Exposición</title>
 </head>
 <body style="background-color: #fbf2d5;">
     <div class="container d-flex flex-column align-items-center justify-content-center" style="height: 100vh;">
-        <h1 class="mb-4">Crear obra</h1>
+        <h1 class="mb-4">Crear Exposición</h1>
         <div class="card" style="width: 34rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             <div class="card-body d-flex flex-column align-items-center justify-content-center">
                 <!-- Session Status -->
                 <x-auth-session-status class="mb-4" :status="session('status')" />
 
-                <form method="POST" action="{{route('obras.store')}}" class="w-50" enctype="multipart/form-data">
+                <form method="POST" action="{{route('expo.store')}}" class="w-50" enctype="multipart/form-data">
                     @csrf
+                    <!-- Organizador -->
+                    <div class="mb-3">
+                        <p style="font-size: 20px">Organizador</p>
+                        <x-text-input id="organizador" class="block mt-1 w-full" type="string" name="organizador" :value="old('organizador')" required autofocus autocomplete="organizador" />
+                        <x-input-error :messages="$errors->get('organizador')" class="mt-2" />
+                    </div>
+
                     <!-- Nombre -->
                     <div class="mb-3">
                         <p style="font-size: 20px">Nombre</p>
-                        <x-text-input id="nombre" class="block mt-1 w-full" type="nombre" name="nombre" :value="old('nombre')" required autofocus autocomplete="nombre" />
+                        <x-text-input id="nombre" class="block mt-1 w-full" type="string" name="nombre" :value="old('nombre')" required autocomplete="nombre" />
                         <x-input-error :messages="$errors->get('nombre')" class="mt-2" />
                     </div>
 
                     <!-- Descripcion -->
                     <div class="mb-3">
                         <p style="font-size: 20px">Descripcion</p>
-                        <x-text-input id="descripcion" class="block mt-1 w-full" type="descripcion" name="descripcion" required autocomplete="descripcion" />
+                        <x-text-input id="descripcion" class="block mt-1 w-full" type="descripcion" name="descripcion" :value="old('descripcion')" required autocomplete="descripcion" />
                         <x-input-error :messages="$errors->get('descripcion')" class="mt-2" />
                     </div>
 
-                    <!-- Artista -->
+                    <!-- Aforo -->
                     <div class="mb-3">
-                        <p style="font-size: 20px">Artista</p>
-                        <x-text-input id="artista" class="block mt-1 w-full" type="artista" name="artista" required autocomplete="artista" />
-                        <x-input-error :messages="$errors->get('artista')" class="mt-2" />
+                        <p style="font-size: 20px">Aforo</p>
+                        <x-text-input id="aforo" class="block mt-1 w-full" type="string" name="aforo" :value="old('aforo')" required autocomplete="aforo" />
+                        <x-input-error :messages="$errors->get('aforo')" class="mt-2" />
                     </div>
 
                     <!-- Fecha de creación de la obra -->
@@ -187,15 +194,9 @@
                         <x-input-error :messages="$errors->get('fecha_creacion')" class="mt-2" />
                     </div>
 
-                    <!-- Foto -->
-                    <div class="mb-3">
-                        <p style="font-size: 20px">Foto de la obra</p>
-                        <x-text-input id="foto" class="block mt-1 w-full" type="file" name="foto" required autocomplete="foto" />
-                        <x-input-error :messages="$errors->get('foto')" class="mt-2" />
-                    </div>
 
                     <div class="mt-5">
-                        <input value="Crear nueva obra" type="submit" class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('crear_obras') }}'"></input>
+                        <input value="Crear nueva exposición" type="submit" class="boton_entradas btn btn-lg"></input>
                     </div>
                 </form>
             </div>

@@ -103,13 +103,41 @@
         .botones-comprar-container {
         display: flex; /* Flexbox para alinear botones en la misma línea */
         justify-content: center; /* Alinea los botones a la izquierda */
-}
+        }
 
         .boton_entradas:hover {
             background-image: url('../imagenes/ticketnegro.png');
             background-color: cornflowerblue;
             color: black;
         }
+
+        .boton_entradas_exposicion_crear{
+            height: 6vh;
+            border-radius: 0;
+            background-color: rgb(0, 255, 0);
+            border: 1px solid rgb(0, 0, 0);
+            color: rgb(0, 0, 0);
+            width: auto; /* Ajusta el ancho automático */
+            margin-right: 10px; /* Espacio entre botones */
+        }
+
+        .boton_borrar_expo{
+            height: 6vh;
+            border-radius: 0;
+            background-color: rgb(255, 0, 0);
+            border: 1px solid rgb(0, 0, 0);
+            color: rgb(0, 0, 0);
+            width: auto; /* Ajusta el ancho automático */
+            margin-right: 10px; /* Espacio entre botones */
+        }
+
+        .boton_borrar_expo:hover{
+            /* background-image: url('../imagenes/ticketnegro.png'); */
+            background-color: rgb(255, 0, 0);
+            color: rgb(0, 0, 0);
+        }
+
+
     </style>
 </head>
 <body>
@@ -156,11 +184,26 @@
                                     @if (Auth::check())
                                         @if (session('entrada'))
                                             <button class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('comprar_entradas_directo', ['id' => $exposicion->id]) }}'">Comprar la entrada</button>
+                                            <form action="{{ route('expo.destroy', $exposicion->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="boton_entradas_obra btn btn-lg" onclick="">Borrar Exposicion</button>
+                                            </form>
                                         @else
                                             <button class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('comprar_entradas_directo', ['id' => $exposicion->id]) }}'">Comprar la entrada</button>
+                                            <form action="{{ route('expo.destroy', $exposicion->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="boton_borrar_expo btn btn-lg" onclick="">Borrar Exposicion</button>
+                                            </form>
                                         @endif
                                     @else
-                                        <button class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('login') }}'">Comprar la entrada</button>
+                                        <button class="boton_borrar_expo btn btn-lg" onclick="window.location.href='{{ route('login') }}'">Comprar la entrada</button>
+                                        <form action="{{ route('expo.destroy', $exposicion->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="boton_borrar_expo btn btn-lg" onclick="">Borrar Exposicion</button>
+                                        </form>
                                     @endif
                                 </div>
                             </div>
@@ -168,7 +211,18 @@
                     </div>
                 </div>
             @endforeach
+            <button class="boton_entradas_exposicion_crear btn btn-lg" onclick="window.location.href='{{ route('crear_exposiciones') }}'">Crear nueva exposición</button>
         </div>
     </div>
 </body>
+
+<script>
+    document.querySelectorAll('form').forEach(form => {
+        form.addEventListener('submit', function(event) {
+            if (!confirm('¿Estás seguro de que deseas eliminar esta exposición?')) {
+                event.preventDefault();
+            }
+        });
+    });
+</script>
 </html>

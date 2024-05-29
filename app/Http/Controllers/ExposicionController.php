@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Exposicion;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Database\QueryException;
+use Carbon\Carbon;
 
 
 class ExposicionController extends Controller
@@ -32,7 +34,28 @@ class ExposicionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'organizador' => 'required|string',
+            'nombre' => 'required|string|max:255',
+            'descripcion' => 'required|string',
+            'aforo' => 'required|integer',
+
+        ]);
+
+        try{
+            $expo = Exposicion::create([
+                'organizador' => $request->organizador,
+                'nombre' => $request->nombre,
+                'descripcion' => $request->descripcion,
+                'fecha_creacion' => Carbon::now(), // Obtener la fecha y hora actual
+                'aforo' => $request->aforo,
+            ]);
+
+            $expo->save();
+            return redirect()->route('listar_exposiciones')->with('success', 'La exposicion ha sido guardada exitosamente.');
+        }catch(QueryException $e){
+            dd($e);
+        }
     }
 
     /**
@@ -65,7 +88,10 @@ class ExposicionController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $expo = Exposicion::findOrFail($id);
+        $expo->delete();
+
+        return redirect()->route('listar_exposiciones')->with('success', 'Exposicion eliminada correctamente');
     }
 
     public function crearSesionExposicion($id)

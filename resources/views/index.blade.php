@@ -179,7 +179,7 @@
 <!-- CONTENIDOS -->
 <section class="div-servicios">
     <div class="row">
-        <div class="div-obras text-center col-sm-6" onclick="location.href='url_destino';">
+        <div class="div-obras text-center col-sm-6" onclick="location.href='{{route('listar_obras')}}';">
                 <div class="row">
                     <div class="col">
                         <h1>Obras</h1>

@@ -26,6 +26,10 @@ Route::get('/crear_obras' , function () {
     return view('crear_obras');
 })->name('crear_obras')->middleware('auth');
 
+Route::get('/crear_exposiciones' , function () {
+    return view('crear_exposicion');
+})->name('crear_exposiciones')->middleware('auth');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -53,7 +57,11 @@ Route::get('/comprar_entradas/{id}', [ExposicionController::class, 'crearSesionE
 Route::post('/guardar-entrada', [EntradaController::class, 'store'])->name('entradas.store');
 
 //Ruta para guardar obras
-Route::post('/guardar-obra', [ObrasController::class, 'store'])->name('crear_obras');
+Route::post('/obras', [ObrasController::class, 'store'])->name('obras.store');
+
+//Ruta para guardar las exposiciones
+Route::post('/exposiciones', [ExposicionController::class, 'store'])->name('expo.store');
+
 
 
 //Ruta para ir al sobre nosotros
@@ -69,6 +77,10 @@ Route::middleware('auth')->group(function () {
 
 //Ruta para borrar una obra en específico
 Route::delete('/obra/{id}', [ObrasController::class, 'destroy'])->name('obra.destroy');
+
+//Ruta para borrar una exposición en específico
+Route::delete('/expo/{id}', [ExposicionController::class, 'destroy'])->name('expo.destroy');
+
 
 
 require __DIR__.'/auth.php';

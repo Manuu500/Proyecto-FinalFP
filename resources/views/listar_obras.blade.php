@@ -144,7 +144,7 @@
             <div class="col-sm-12 d-flex">
                 <div class="d-flex flex-grow-1 justify-content-around align-items-center">
                     <a href="{{ route('index') }}">
-                        <img class="m-2" width="100px" height="100px" src="../imagenes/blob-modified.png" />
+                        <img class="m-2" width="100px" height="100px" src="../storage/imagenes/blob-modified.png" />
                     </a>
                 </div>
             </div>
@@ -174,7 +174,7 @@
                         <div class="row d-flex align-items-center justify-content-between">
                             <div class="col-sm-3">
                                 <h4 class="text-center">
-                                    <img class="img-fluid rounded-circle" src="{{ asset('imagenes/' . $obra->foto) }}" alt="Exposition Image"/>
+                                    <img class="img-fluid rounded-circle" src="{{ asset('/storage/imagenes/' . $obra->foto) }}" alt="Exposition Image"/>
                                 </h4>
                             </div>
                             <div class="col">
@@ -188,7 +188,7 @@
                                     <form action="{{ route('obra.destroy', $obra->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="boton_entradas_obra btn btn-lg" onclick="">Borrar Obra</button>
+                                        <button class="boton_entradas_obra btn btn-lg">Borrar Obra</button>
                                     </form>
                                 </div>
                             </div>

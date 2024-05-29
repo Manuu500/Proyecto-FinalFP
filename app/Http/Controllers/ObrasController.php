@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Obra;
+use Illuminate\Database\QueryException;
+use Carbon\Carbon;
+
 
 
 class ObrasController extends Controller
@@ -30,20 +33,34 @@ class ObrasController extends Controller
      */
     public function store(Request $request)
     {
-        $obra = Obra::create([
-            'nombre' => $request->nombre,
-            'descripcion' => $request->descripcion,
-            'artista' => $request->artista,
-            'foto' => $request->foto
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'descripcion' => 'required|string',
+            'artista' => 'required|string',
         ]);
 
-        //Depurar
-        // dd($entrada);
-        //Log::info('Datos validados:', $validatedData);
+        try{
+            $obra = Obra::create([
+                'nombre' => $request->nombre,
+                'descripcion' => $request->descripcion,
+                'artista' => $request->artista,
+                'fecha_creacion' => Carbon::now(), // Obtener la fecha y hora actual
+                'foto' => $request->foto
+            ]);
 
-        $obra->save();
-        return redirect()->route('listar_obras')->with('success', 'Compra realizada con éxito');
+            if ($request->hasFile('foto')) {
+                $nombreFoto = time() . "-" . $request->file('foto')->getClientOriginalName();
+                $obra->foto = $nombreFoto;
 
+                $request->file('foto')->storeAs('public/imagenes', $nombreFoto);
+            }
+
+
+            $obra->save();
+            return redirect()->route('listar_obras')->with('success', 'La obra de arte ha sido guardada exitosamente.');
+        }catch(QueryException $e){
+            dd($e);
+        }
     }
 
     /**
