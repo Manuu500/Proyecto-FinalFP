@@ -185,18 +185,23 @@
                                     <p class="text-center">{{ $obra->descripcion }}</p>
                                 </div>
                                 <div class="row botones-comprar-container">
-                                    <form action="{{ route('obra.destroy', $obra->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="boton_entradas_obra btn btn-lg">Borrar Obra</button>
-                                    </form>
+                                    @if (Auth::user()->tipo == "admin")
+                                        <form action="{{ route('obra.destroy', $obra->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="boton_entradas_obra btn btn-lg">Borrar Obra</button>
+                                        </form>
+                                        <button class="boton_entradas_obra_crear btn btn-lg" onclick="window.location.href='{{ route('obra.edit', ['id' => $obra->id])}}'">Editar obra</button>
+                                    @endif
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             @endforeach
+            @if (Auth::user()->tipo == "admin")
             <button class="boton_entradas_obra_crear btn btn-lg" onclick="window.location.href='{{ route('crear_obras') }}'">Crear nueva obra</button>
+            @endif
         </div>
     </div>
 </body>

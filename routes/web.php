@@ -62,6 +62,14 @@ Route::post('/obras', [ObrasController::class, 'store'])->name('obras.store');
 //Ruta para guardar las exposiciones
 Route::post('/exposiciones', [ExposicionController::class, 'store'])->name('expo.store');
 
+//Ruta para actualizae las exposiciones
+Route::put('/expo/{id}', [ExposicionController::class, 'update'])->name('expo.update');
+Route::get('/expo/{id}/edit', [ExposicionController::class, 'edit'])->name('expo.edit');
+
+//Ruta para actualizae las obras
+Route::get('/obra/{id}/edit', [ObrasController::class, 'edit'])->name('obra.edit');
+Route::put('/obra/{id}', [ObrasController::class, 'update'])->name('obra.update');
+
 
 
 //Ruta para ir al sobre nosotros

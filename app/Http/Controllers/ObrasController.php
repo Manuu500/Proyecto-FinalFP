@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Obra;
 use Illuminate\Database\QueryException;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
+
 
 
 
@@ -37,6 +39,7 @@ class ObrasController extends Controller
             'nombre' => 'required|string|max:255',
             'descripcion' => 'required|string',
             'artista' => 'required|string',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         try{
@@ -44,7 +47,7 @@ class ObrasController extends Controller
                 'nombre' => $request->nombre,
                 'descripcion' => $request->descripcion,
                 'artista' => $request->artista,
-                'fecha_creacion' => Carbon::now(), // Obtener la fecha y hora actual
+                'fecha_creacion' => Carbon::now(), // Obtener solo la fecha actual
                 'foto' => $request->foto
             ]);
 
@@ -76,7 +79,8 @@ class ObrasController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $obra = Obra::findOrFail($id);
+        return view('editar_obras', compact('obra'));
     }
 
     /**
@@ -84,7 +88,37 @@ class ObrasController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $request->validate([
+                'nombre' => 'required|string|max:255',
+                'descripcion' => 'required|string',
+                'artista' => 'required|string',
+                'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+
+            $obra = Obra::findOrFail($id);
+
+            if ($request->hasFile('foto')) {
+                if ($obra->foto) {
+                    Storage::delete($obra->foto);
+                }
+
+                $nombreFoto = time() .'-'. $request->file('foto')->getClientOriginalName();
+
+                $rutaAlmacenada = $request->file('foto')->storeAs('public/imagenes', $nombreFoto);
+
+                $obra->foto = $nombreFoto;
+            }
+
+            $obra->update($request->except('foto'));
+            $obra->save();
+            return redirect()->route('listar_obras')->with('success', 'Obra actualizada con éxito');
+        } catch (QueryException $e) {
+            dd($e);
+        }
+
+
+
     }
 
     /**

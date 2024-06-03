@@ -11,7 +11,6 @@ class Exposicion extends Model
     protected $table = 'exposicion'; // Nombre de la tabla
 
     protected $fillable = [
-        'organizador',
         'nombre',
         'descripcion',
         'aforo',

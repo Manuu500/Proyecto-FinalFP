@@ -35,19 +35,16 @@ class ExposicionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'organizador' => 'required|string',
             'nombre' => 'required|string|max:255',
             'descripcion' => 'required|string',
             'aforo' => 'required|integer',
-
         ]);
 
         try{
             $expo = Exposicion::create([
-                'organizador' => $request->organizador,
                 'nombre' => $request->nombre,
                 'descripcion' => $request->descripcion,
-                'fecha_creacion' => Carbon::now(), // Obtener la fecha y hora actual
+                'fecha_inicio' => Carbon::now(), // Obtener la fecha y hora actual
                 'aforo' => $request->aforo,
             ]);
 
@@ -63,8 +60,8 @@ class ExposicionController extends Controller
      */
     public function show($id)
     {
-        $exposition = Exposicion::findOrFail($id);
-        return view('expositions.show', compact('exposition'));
+        // $exposition = Exposicion::findOrFail($id);
+        // return view('expositions.show', compact('exposition'));
     }
 
     /**
@@ -72,7 +69,8 @@ class ExposicionController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $exposicion = Exposicion::findOrFail($id);
+        return view('editar_exposicion', compact('exposicion'));
     }
 
     /**
@@ -80,7 +78,24 @@ class ExposicionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try{
+            $request->validate([
+                'nombre' => 'required|string|',
+                'descripcion' => 'required|string',
+                'aforo' => 'required|integer',
+                'fecha_inicio' => 'required',
+            ]);
+
+            $exposicion = Exposicion::findOrFail($id);
+            // dd($exposicion);
+
+            $exposicion->update($request->all());
+            $exposicion->save();
+            return redirect()->route('listar_exposiciones')->with('success', 'Exposición actualizada con éxito');
+        }catch(QueryException $e){
+            dd($e);
+        }
+
     }
 
     /**

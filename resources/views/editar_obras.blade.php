@@ -147,50 +147,55 @@
             margin-right: 10px; /* Espacio entre botones */
         }
     </style>
-    <title>Crear Exposición</title>
+    <title>Editar Obra</title>
 </head>
 <body style="background-color: #fbf2d5;">
     <div class="container d-flex flex-column align-items-center justify-content-center" style="height: 100vh;">
-        <h1 class="mb-4">Crear Exposición</h1>
+        <h1 class="mb-4">Editar obra</h1>
         <div class="card" style="width: 34rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             <div class="card-body d-flex flex-column align-items-center justify-content-center">
                 <!-- Session Status -->
                 <x-auth-session-status class="mb-4" :status="session('status')" />
 
-                <form method="POST" action="{{ route('expo.update', $exposicion->id) }}" class="w-50" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('obra.update', $obra->id) }}" class="w-50" enctype="multipart/form-data">
+                    @method('PUT')
                     @csrf
-
                     <!-- Nombre -->
                     <div class="mb-3">
                         <p style="font-size: 20px">Nombre</p>
-                        <x-text-input id="nombre" class="block mt-1 w-full" type="string" name="nombre" :value="old('nombre')" value="{{$exposicion->nombre}}" required autocomplete="nombre" />
+                        <x-text-input id="nombre" value="{{$obra->nombre}}" class="block mt-1 w-full" type="nombre" name="nombre"  required autofocus autocomplete="nombre" />
                         <x-input-error :messages="$errors->get('nombre')" class="mt-2" />
                     </div>
 
                     <!-- Descripcion -->
                     <div class="mb-3">
                         <p style="font-size: 20px">Descripcion</p>
-                        <x-text-input id="descripcion" class="block mt-1 w-full" type="descripcion" name="descripcion" :value="old('descripcion')" required autocomplete="descripcion" />
+                        <x-text-input id="descripcion" value="{{$obra->descripcion}}" class="block mt-1 w-full" type="descripcion" name="descripcion" required autocomplete="descripcion" />
                         <x-input-error :messages="$errors->get('descripcion')" class="mt-2" />
                     </div>
 
-                    <!-- Aforo -->
+                    <!-- Artista -->
                     <div class="mb-3">
-                        <p style="font-size: 20px">Aforo</p>
-                        <x-text-input id="aforo" class="block mt-1 w-full" type="string" name="aforo" :value="old('aforo')" required autocomplete="aforo" />
-                        <x-input-error :messages="$errors->get('aforo')" class="mt-2" />
+                        <p style="font-size: 20px">Artista</p>
+                        <x-text-input id="artista" class="block mt-1 w-full" value="{{$obra->artista}}" type="artista" name="artista" required autocomplete="artista" />
+                        <x-input-error :messages="$errors->get('artista')" class="mt-2" />
                     </div>
 
                     <!-- Fecha de creación de la obra -->
                     <div class="mb-3">
                         <p style="font-size: 20px">Fecha de creación</p>
-                        <x-text-input id="fecha_creacion" class="block mt-1 w-full" type="date" name="fecha_creacion" required autocomplete="fecha_creacion" />
+                        <x-text-input id="fecha_creacion" value="{{$obra->fecha_creacion}}" class="block mt-1 w-full" type="date" name="fecha_creacion" required autocomplete="fecha_creacion" />
                         <x-input-error :messages="$errors->get('fecha_creacion')" class="mt-2" />
                     </div>
 
-
+                    <!-- Foto -->
+                    <div class="mb-3">
+                        <p style="font-size: 20px">Foto de la obra</p>
+                        <x-text-input id="foto" value="{{$obra->foto}}" class="block mt-1 w-full" type="file" name="foto" required autocomplete="foto" />
+                        <x-input-error :messages="$errors->get('foto')" class="mt-2" />
+                    </div>
                     <div class="mt-5">
-                        <input value="Crear nueva exposición" type="submit" class="boton_entradas btn btn-lg"></input>
+                        <input value="Actualizar obra" type="submit" class="boton_entradas btn btn-lg"></input>
                     </div>
                 </form>
             </div>

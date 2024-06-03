@@ -15,7 +15,8 @@ class Obra extends Model
         'foto',
         'nombre',
         'artista',
-        'descripcion'
+        'descripcion',
+        'fecha_creacion'
     ];
 
 }

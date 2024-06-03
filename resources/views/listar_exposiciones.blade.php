@@ -184,26 +184,33 @@
                                     @if (Auth::check())
                                         @if (session('entrada'))
                                             <button class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('comprar_entradas_directo', ['id' => $exposicion->id]) }}'">Comprar la entrada</button>
+                                            @if (Auth::user()->tipo == "admin")
                                             <form action="{{ route('expo.destroy', $exposicion->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="boton_entradas_obra btn btn-lg" onclick="">Borrar Exposicion</button>
                                             </form>
+                                            @endif
                                         @else
                                             <button class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('comprar_entradas_directo', ['id' => $exposicion->id]) }}'">Comprar la entrada</button>
+                                            @if (Auth::user()->tipo == "admin")
                                             <form action="{{ route('expo.destroy', $exposicion->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="boton_borrar_expo btn btn-lg" onclick="">Borrar Exposicion</button>
                                             </form>
+
+                                            <button class="boton_borrar_expo btn btn-lg" onclick="window.location.href='{{ route('expo.edit', ['id' => $exposicion->id]) }}'">Editar </button>
+
+                                            @endif
                                         @endif
                                     @else
                                         <button class="boton_borrar_expo btn btn-lg" onclick="window.location.href='{{ route('login') }}'">Comprar la entrada</button>
-                                        <form action="{{ route('expo.destroy', $exposicion->id) }}" method="POST">
+                                        {{-- <form action="{{ route('expo.destroy', $exposicion->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button class="boton_borrar_expo btn btn-lg" onclick="">Borrar Exposicion</button>
-                                        </form>
+                                        </form> --}}
                                     @endif
                                 </div>
                             </div>
@@ -211,7 +218,11 @@
                     </div>
                 </div>
             @endforeach
+            @auth
+            @if (Auth::user()->tipo == "admin")
             <button class="boton_entradas_exposicion_crear btn btn-lg" onclick="window.location.href='{{ route('crear_exposiciones') }}'">Crear nueva exposición</button>
+            @endif
+            @endauth
         </div>
     </div>
 </body>
