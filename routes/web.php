@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExposicionController;
 use App\Http\Controllers\ObrasController;
+use App\Http\Controllers\UserController;
 
 
 
@@ -30,6 +31,10 @@ Route::get('/crear_exposiciones' , function () {
     return view('crear_exposicion');
 })->name('crear_exposiciones')->middleware('auth');
 
+Route::get('/crear_usuario' , function () {
+    return view('crear_usuario');
+})->name('crear_usuario')->middleware('auth');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -38,10 +43,14 @@ Route::get('/listar_exposiciones' , function () {
     return view('listar_exposiciones');
 })->name('listar_exposiciones');
 
+
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
 //Ruta para listar las exposiciones
 Route::get('/listar_exposiciones', [ExposicionController::class, 'index'])->name('listar_exposiciones');
+
+//Ruta para listar todos los usuarios en la gestion
+Route::get('/gestion_usuarios', [UserController::class, 'index'])->name('gestion_usuarios');
 
 //Ruta para listar las obras
 Route::get('/listar_obras', [ObrasController::class, 'index'])->name('listar_obras');
@@ -62,6 +71,9 @@ Route::post('/obras', [ObrasController::class, 'store'])->name('obras.store');
 //Ruta para guardar las exposiciones
 Route::post('/exposiciones', [ExposicionController::class, 'store'])->name('expo.store');
 
+//Ruta para guardar los usuarios
+Route::post('/users', [UserController::class, 'store'])->name('user.store');
+
 //Ruta para actualizae las exposiciones
 Route::put('/expo/{id}', [ExposicionController::class, 'update'])->name('expo.update');
 Route::get('/expo/{id}/edit', [ExposicionController::class, 'edit'])->name('expo.edit');
@@ -69,6 +81,10 @@ Route::get('/expo/{id}/edit', [ExposicionController::class, 'edit'])->name('expo
 //Ruta para actualizae las obras
 Route::get('/obra/{id}/edit', [ObrasController::class, 'edit'])->name('obra.edit');
 Route::put('/obra/{id}', [ObrasController::class, 'update'])->name('obra.update');
+
+//Ruta para actualizae los usuarios
+Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
+Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
 
 
 
@@ -88,6 +104,9 @@ Route::delete('/obra/{id}', [ObrasController::class, 'destroy'])->name('obra.des
 
 //Ruta para borrar una exposición en específico
 Route::delete('/expo/{id}', [ExposicionController::class, 'destroy'])->name('expo.destroy');
+
+//Ruta para borrar un usuario en específico
+Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 
 
 

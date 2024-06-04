@@ -156,6 +156,12 @@
                     @csrf
                     <button id="botonCerrarSesion" type="submit" class="btn btn-lg boton_entradas">Cerrar sesión</button>
                 </form>
+                @if (Auth::user()->tipo == "admin")
+                    <button id="boton_entradas" type="button" class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('gestion_usuarios') }}'">
+                        <label>Gestión de Usuarios</label>
+                        {{-- <img class="ml-2" width="30px" height="30px" src="../imagenes/ticketazul.png"/> --}}
+                    </button>
+                @endif
                 @endauth
                 <button id="boton_entradas" type="button" class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('entradas') }}'">
                     <label>Entradas</label>
