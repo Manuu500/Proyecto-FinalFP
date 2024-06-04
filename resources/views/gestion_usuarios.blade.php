@@ -73,14 +73,12 @@
 <body>
     <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col text-center">
+            <div class="col-lg-10 text-center">
                 <h1>USUARIOS REGISTRADOS EN EL SISTEMA</h1>
-                <div>
-                    @if (session("status"))
-                        <div><h3 style="color:green">{{session("status")}}</h3></div>
-                    @endif
-                </div>
-                <div class="container mt-5">
+                @if (session("status"))
+                    <div><h3 style="color:green">{{session("status")}}</h3></div>
+                @endif
+                <div class="table-responsive">
                     <table class="table table-bordered text-center">
                         <thead>
                             <tr>
@@ -121,10 +119,12 @@
                         </tbody>
                     </table>
                 </div>
-                <button class="boton_entradas_obra btn btn-lg" onclick="window.location.href='{{ route('crear_usuario') }}'">Añadir usuario</button>
+                <button class="boton_entradas_obra btn btn-lg mt-4" onclick="window.location.href='{{ route('crear_usuario') }}'">Añadir usuario</button>
             </div>
         </div>
     </div>
+
+
 </body>
 </html>
 
