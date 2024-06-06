@@ -157,13 +157,13 @@
                 <!-- Session Status -->
                 <x-auth-session-status class="mb-4" :status="session('status')" />
 
-                <form method="POST" action="{{ route('expo.update', $exposicion->id) }}" class="w-50" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('expo.store')}}" class="w-50" enctype="multipart/form-data">
                     @csrf
 
                     <!-- Nombre -->
                     <div class="mb-3">
                         <p style="font-size: 20px">Nombre</p>
-                        <x-text-input id="nombre" class="block mt-1 w-full" type="string" name="nombre" :value="old('nombre')" value="{{$exposicion->nombre}}" required autocomplete="nombre" />
+                        <x-text-input id="nombre" class="block mt-1 w-full" type="string" name="nombre" :value="old('nombre')" required autocomplete="nombre" />
                         <x-input-error :messages="$errors->get('nombre')" class="mt-2" />
                     </div>
 
@@ -191,6 +191,7 @@
 
                     <div class="mt-5">
                         <input value="Crear nueva exposición" type="submit" class="boton_entradas btn btn-lg"></input>
+                        <button value="Volver" class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('listar_exposiciones') }}'">Volver</button>
                     </div>
                 </form>
             </div>

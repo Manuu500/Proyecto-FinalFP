@@ -88,13 +88,13 @@
 </div>
 
 
-<div class="bg-primary divEntradas ">
+<div class="bg-primary divEntradas">
     <div class="col">
         <div class="row-sm-12 container-center">
-
+            @foreach($tiposEntradas as $tipoEntrada)
             <div style="width: 850px" class="card mt-5">
                 <div class="card-header d-flex flex-column align-items-center">
-                    <h3 class="mb-0">Entrada básica</h3>
+                    <h3 class="mb-0">{{ $tipoEntrada->nombre }}</h3>
                 </div>
                 <div class="row">
                     <div class="col-sm-4">
@@ -103,13 +103,13 @@
                     <div class="col-sm-8 d-flex justify-content-center align-items-center">
                         <div class="card-body align-items-center">
                             <p class="card-text">Incluye acceso a todas las exposiciones disponibles. </p>
-                            <p><b>PRECIO:</b> 14,99$</p>
+                            <p><b>PRECIO:</b> {{ $tipoEntrada->precio }}$</p>
                             @auth
-                                <button id="boton_entradas" type="button" class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('comprar_entradas') }}'">
+                                <button type="button" class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('comprar_entradas', ['tipoEntrada' => $tipoEntrada->id]) }}'">
                                     <label>Comprar</label>
                                 </button>
                             @else
-                                <button id="boton_entradas" type="button" class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('login') }}'">
+                                <button type="button" class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('login') }}'">
                                     <label>Comprar</label>
                                 </button>
                             @endauth
@@ -118,7 +118,7 @@
                     </div>
                 </div>
             </div>
-
+            @endforeach
         </div>
     </div>
 </div>

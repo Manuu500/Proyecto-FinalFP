@@ -188,6 +188,7 @@
 
                     <div class="mt-5 text-center">
                         <button type="submit" class="btn btn-custom btn-lg">Actualizar Usuario</button>
+                        <button class="btn btn-custom btn-lg" onclick="window.location.href='{{ route('gestion_usuarios') }}'">Volver</button>
                     </div>
                 </form>
             </div>

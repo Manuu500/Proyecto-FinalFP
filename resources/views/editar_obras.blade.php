@@ -196,6 +196,7 @@
                     </div>
                     <div class="mt-5">
                         <input value="Actualizar obra" type="submit" class="boton_entradas btn btn-lg"></input>
+                        <button value="Volver" class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('listar_obras') }}'">Volver</button>
                     </div>
                 </form>
             </div>

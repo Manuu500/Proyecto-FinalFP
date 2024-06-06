@@ -110,33 +110,32 @@
             cursor: pointer !important;
         }
 
-        #boton_entradas {
-            height: 8vh;
-            border-radius: 0;
-            background-color: transparent;
-            border: 1px solid cornflowerblue;
-            color: cornflowerblue;
-        }
-
-        #boton_entradas:hover {
-            background-image: url('../imagenes/ticketnegro.png'); /* Nueva imagen para el hover */
-            background-color: cornflowerblue;
-            color: black;
-        }
-
         .boton_entradas {
             height: 8vh;
             border-radius: 0;
             background-color: transparent;
-            border: 1px solid cornflowerblue;
-            color: cornflowerblue;
+            border: 1px solid rgb(255, 174, 0);
+            color: rgb(255, 174, 0);
         }
 
         .boton_entradas:hover {
             background-image: url('../imagenes/ticketnegro.png'); /* Nueva imagen para el hover */
+            background-color: rgb(255, 174, 0);
+            color: black;
+        }
+
+        .boton_normal {
+            height: 8vh;
+            border-radius: 0;
+            background-color: transparent;
+            border: 1px solid cornflowerblue;
+            color: cornflowerblue;
+        }
+
+        .boton_normal:hover {
+            background-image: url('../imagenes/ticketnegro.png'); /* Nueva imagen para el hover */
             background-color: cornflowerblue;
             color: black;
-
         }
     </style>
 </head>
@@ -154,22 +153,29 @@
                 @auth
                 <form id="formCerrarSesion" method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button id="botonCerrarSesion" type="submit" class="btn btn-lg boton_entradas">Cerrar sesión</button>
+                    <button id="botonCerrarSesion" type="submit" class="btn btn-lg boton_normal">Cerrar sesión</button>
                 </form>
                 @if (Auth::user()->tipo == "admin")
-                    <button id="boton_entradas" type="button" class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('gestion_usuarios') }}'">
+                    <button id="boton_normal" type="button" class="boton_normal btn btn-lg" onclick="window.location.href='{{ route('gestion_usuarios') }}'">
                         <label>Gestión de Usuarios</label>
                         {{-- <img class="ml-2" width="30px" height="30px" src="../imagenes/ticketazul.png"/> --}}
                     </button>
                 @endif
-                @endauth
-                <button id="boton_entradas" type="button" class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('entradas') }}'">
+                <button type="button" class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('entradas') }}'">
                     <label>Entradas</label>
                     <img class="ml-2" width="30px" height="30px" src="../imagenes/ticketazul.png"/>
                 </button>
+                @else
+                <button type="button" class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('entradas') }}'">
+                    <label>Entradas</label>
+                    <img class="ml-2" width="30px" height="30px" src="../imagenes/ticketazul.png"/>
+                </button>
+                <button id="boton_normal" type="button" class="boton_normal btn btn-lg" onclick="window.location.href='{{ route('login') }}'">
+                    <label>Iniciar sesión</label>
+                </button>
+                @endauth
             </div>
         </div>
-
     </div>
 </header>
 

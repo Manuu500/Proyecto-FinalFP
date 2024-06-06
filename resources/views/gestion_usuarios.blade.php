@@ -120,6 +120,7 @@
                     </table>
                 </div>
                 <button class="boton_entradas_obra btn btn-lg mt-4" onclick="window.location.href='{{ route('crear_usuario') }}'">Añadir usuario</button>
+                <button class="boton_entradas_obra btn btn-lg mt-4" onclick="window.location.href='{{ route('index') }}'">Volver</button>
             </div>
         </div>
     </div>

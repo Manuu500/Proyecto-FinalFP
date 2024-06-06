@@ -6,11 +6,21 @@ use Illuminate\Http\Request;
 use App\Models\Entrada;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
+use App\Models\TipoEntrada;
+use Illuminate\Database\QueryException;
+
 
 
 
 class EntradaController extends Controller
 {
+
+    public function index(){
+        $tiposEntradas = TipoEntrada::all(); // Fetch all ticket types
+        return view('entradas', compact('tiposEntradas'));
+
+    }
+
     public function store(Request $request)
     {
 
@@ -77,4 +87,17 @@ class EntradaController extends Controller
             return redirect()->route('index')->with('success', 'Entrada comprada.');
         }
     }
+
+    // public function mostrarTiposEntradas()
+    // {
+    //     try{
+    //         $entradasBasica = Entrada::where('tipo', 'basica')->get();
+    //         $entradasPremium = Entrada::where('tipo', 'premium')->get();
+
+
+    //         return view('entradas', compact('entradasBasica', 'entradasPremium'));
+    //     }catch(QueryException $e){
+    //         dd($e);
+    //     }
+    // }
 }
