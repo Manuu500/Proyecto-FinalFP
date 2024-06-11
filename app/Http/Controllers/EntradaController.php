@@ -18,7 +18,6 @@ class EntradaController extends Controller
     public function index(){
         $tiposEntradas = TipoEntrada::all(); // Fetch all ticket types
         return view('entradas', compact('tiposEntradas'));
-
     }
 
     public function comprar_entradas($id){
@@ -45,7 +44,7 @@ class EntradaController extends Controller
             'metodo_pago' => $request->metodo_pago
         ]);
 
-        dd($entrada);
+        // dd($entrada);
 
         //Depurar
         // dd($entrada);

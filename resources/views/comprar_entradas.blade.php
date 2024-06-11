@@ -102,7 +102,7 @@
 
 
                     <input type="submit" id="boton_entradas" type="button" class="boton_entradas btn btn-lg" value="Comprar"></input>
-                    <label><b>Precio:</b> 14,99$</label>
+                    <label><b>Precio:</b> {{$entrada->precio}}$</label>
                 </form>
             </div>
         </div>
