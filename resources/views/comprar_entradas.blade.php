@@ -49,8 +49,15 @@
         <h1 class="mb-4">Introducir datos de la compra</h1>
         <div class="card" style="width: 34rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             <div class="card-body d-flex flex-column align-items-center justify-content-center">
-                <form method="POST" action="{{ route('entradas.store') }}" class="w-75">
+
+                <form method="POST" action="{{ route('entradas.store')}}" class="w-75">
                     @csrf
+
+                    <input type="text" name="tipoEntrada" value="{{$entrada->id}}" hidden>
+                    <input type="text" name="precio" value="{{$entrada->precio}}" hidden>
+
+
+                    {{-- <input type="hidden" name="tipo_entrada_id" value="{{ $tipoEntrada->id }}"> --}}
 
                     <!-- Número de entradas -->
                     <div class="mb-3 mt-4 entry-control">
@@ -111,15 +118,17 @@
         var entryCount = document.getElementById('entryCount');
 
         minusButton.addEventListener('click', function() {
-            var currentValue = parseInt(entryCount.textContent);
-            if (currentValue > 1) { // Evitar que el número de entradas sea menor que 1
+        var currentValue = parseInt(entryCount.textContent);
+            if (currentValue > 1) {
                 entryCount.innerHTML = '<strong>' + (currentValue - 1) + '</strong>';
+                document.getElementById('numeroEntradas').value = currentValue - 1;
             }
         });
 
         plusButton.addEventListener('click', function() {
             var currentValue = parseInt(entryCount.textContent);
             entryCount.innerHTML = '<strong>' + (currentValue + 1) + '</strong>';
+            document.getElementById('numeroEntradas').value = currentValue + 1;
         });
     });
 

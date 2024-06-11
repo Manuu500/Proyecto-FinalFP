@@ -21,6 +21,11 @@ class EntradaController extends Controller
 
     }
 
+    public function comprar_entradas($id){
+        $entrada = TipoEntrada::findOrFail($id);
+        return view('comprar_entradas', compact('entrada'));
+    }
+
     public function store(Request $request)
     {
 
@@ -29,64 +34,65 @@ class EntradaController extends Controller
 
 
         $entrada = Entrada::create([
-            'num_entrada' => 2,
+            'num_entrada' => $request->num_entrada,
             'user_id' => auth()->id(),
-            'expo_id' => 1,
-            'tipo' => "Clasica",
-            'fecha_hora_visita' => $request->fecha_hora_visita,
-            'fecha_hora_fin' => $fecha_hora_fin,
+            'tipo_id' => $request->tipoEntrada,
+            'fecha_hora_visita' => null,
+            'fecha_hora_fin' => null,
             'fecha_compra' => $fecha_compra,
             'observaciones' => "",
+            'precio' => $request->precio,
             'metodo_pago' => $request->metodo_pago
-
         ]);
+
+        dd($entrada);
 
         //Depurar
         // dd($entrada);
         //Log::info('Datos validados:', $validatedData);
 
         $entrada->save();
-        session([
-            'compra_realizada' => true,
-            'entrada' => $entrada->toArray(),
-            'tipoEntrada' => $entrada->tipo,
-            'idEntrada' => $entrada->id
-        ]);
+        // session([
+        //     'compra_realizada' => true,
+        //     'entrada' => $entrada->toArray(),
+        //     'tipoEntrada' => $entrada->tipo,
+        //     'idEntrada' => $entrada->id
+        // ]);
 
         // dd($entrada->id);
 
         return redirect()->route('index')->with('success', 'Compra realizada con éxito');
     }
 
-    public function comprarDirecto($id, Request $request)
-    {
-        // Aquí puedes obtener el ID de la entrada y procesar la compra
-        $entrada = Entrada::find($id);
-        // session(['idExpo' => $id]);
+    // public function comprarDirecto($id, Request $request)
+    // {
+    //     // Aquí puedes obtener el ID de la entrada y procesar la compra
+    //     $entrada = Entrada::find($id);
+    //     // session(['idExpo' => $id]);
 
-        dd($entrada);
-        $fecha_hora_fin = Carbon::now()->format('Y-m-d H:i:s');
-        $fecha_compra = Carbon::now()->format('Y-m-d H:i:s');
+    //     dd($entrada);
+    //     $fecha_hora_fin = Carbon::now()->format('Y-m-d H:i:s');
+    //     $fecha_compra = Carbon::now()->format('Y-m-d H:i:s');
 
-        $entrada = Entrada::create([
-            'num_entrada' => 1,
-            'user_id' => auth()->id(),
-            'expo_id' => $id,
-            'tipo' => "Clasica",
-            'fecha_hora_visita' => $request->fecha_hora_visita,
-            'fecha_hora_fin' => $fecha_hora_fin,
-            'fecha_compra' => $fecha_compra,
-            'observaciones' => "",
-            'metodo_pago' => $request->metodo_pago
-        ]);
+    //     $entrada = Entrada::create([
+    //         'num_entrada' => $request->num_entrada,
+    //         'user_id' => auth()->id(),
+    //         'expo_id' => $id,
+    //         'tipo' => "Clasica",
+    //         'fecha_hora_visita' => $request->fecha_hora_visita,
+    //         'fecha_hora_fin' => $fecha_hora_fin,
+    //         'fecha_compra' => $fecha_compra,
+    //         'observaciones' => "",
+    //         'metodo_pago' => $request->metodo_pago
+    //     ]);
 
-        // Verifica si la entrada existe
-        if (!$entrada) {
-            return redirect()->route('index')->with('error', 'Entrada no encontrada.');
-        } else {
-            return redirect()->route('index')->with('success', 'Entrada comprada.');
-        }
-    }
+    //     // Verifica si la entrada existe
+    //     if (!$entrada) {
+    //         return redirect()->route('index')->with('error', 'Entrada no encontrada.');
+    //     } else {
+    //         return redirect()->route('index')->with('success', 'Entrada comprada.');
+    //     }
+    // }
 
     // public function mostrarTiposEntradas()
     // {

@@ -121,63 +121,63 @@
                     <!-- Nombre -->
                     <div class="form-group">
                         <label for="nombre">Nombre</label>
-                        <input id="nombre" class="form-control" type="text" name="nombre" required autofocus autocomplete="nombre">
+                        <input id="nombre" class="form-control" type="text" value="{{ old('nombre') }}" name="nombre" required autofocus autocomplete="nombre">
                         <x-input-error :messages="$errors->get('nombre')" class="mt-2" />
                     </div>
 
                     <!-- DNI -->
                     <div class="form-group">
                         <label for="dni">DNI</label>
-                        <input id="dni" class="form-control" type="text" name="dni" required autocomplete="dni">
+                        <input id="dni" class="form-control" type="text" value="{{ old('dni') }}" name="dni" required autocomplete="dni">
                         <x-input-error :messages="$errors->get('dni')" class="mt-2" />
                     </div>
 
                     <!-- Primer apellido -->
                     <div class="form-group">
                         <label for="apellido1">Primer Apellido</label>
-                        <input id="apellido1" class="form-control" type="text" name="apellido1" required autocomplete="apellido1">
+                        <input id="apellido1" class="form-control" type="text" value="{{ old('apellido1') }}" name="apellido1" required autocomplete="apellido1">
                         <x-input-error :messages="$errors->get('apellido1')" class="mt-2" />
                     </div>
 
                     <!-- Segundo apellido -->
                     <div class="form-group">
                         <label for="apellido2">Segundo Apellido</label>
-                        <input id="apellido2" class="form-control" type="text" name="apellido2" required autocomplete="apellido2">
+                        <input id="apellido2" class="form-control" type="text" value="{{ old('apellido2') }}" name="apellido2" required autocomplete="apellido2">
                         <x-input-error :messages="$errors->get('apellido2')" class="mt-2" />
                     </div>
 
                     <!-- Fecha de nacimiento -->
                     <div class="form-group">
                         <label for="fechaNacimiento">Fecha de Nacimiento</label>
-                        <input id="fechaNacimiento" class="form-control" type="date" name="fechaNacimiento" required autocomplete="fechaNacimiento">
+                        <input id="fechaNacimiento" class="form-control" type="date" value="{{ old('fechaNacimiento') }}" name="fechaNacimiento" required autocomplete="fechaNacimiento">
                         <x-input-error :messages="$errors->get('fechaNacimiento')" class="mt-2" />
                     </div>
 
                     <!-- Email -->
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input id="email" class="form-control" type="email" name="email" required autocomplete="email">
+                        <input id="email" class="form-control" type="email" value="{{ old('email') }}" name="email" required autocomplete="email">
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
 
                     <!-- Telefono -->
                     <div class="form-group">
                         <label for="telefono">Teléfono</label>
-                        <input id="telefono" class="form-control" type="text" name="telefono" required autocomplete="telefono">
+                        <input id="telefono" class="form-control" type="text" value="{{ old('telefono') }}" name="telefono" required autocomplete="telefono">
                         <x-input-error :messages="$errors->get('telefono')" class="mt-2" />
                     </div>
 
                     <!-- Código Postal -->
                     <div class="form-group">
                         <label for="codPostal">Código Postal</label>
-                        <input id="codPostal" class="form-control" type="text" name="codPostal" required autocomplete="codPostal">
+                        <input id="codPostal" class="form-control" type="text" value="{{ old('codPostal') }}" name="codPostal" required autocomplete="codPostal">
                         <x-input-error :messages="$errors->get('codPostal')" class="mt-2" />
                     </div>
 
                     <!-- Contraseña -->
                     <div class="form-group">
                         <label for="password">Contraseña</label>
-                        <input id="password" class="form-control" type="text" name="password" required autocomplete="password">
+                        <input id="password" class="form-control" type="text" name="password" value="{{ old('password') }}" required autocomplete="password">
                         <x-input-error :messages="$errors->get('password')" class="mt-2" />
                     </div>
 
@@ -194,9 +194,11 @@
 
                     <div class="mt-5 text-center">
                         <button type="submit" class="btn btn-custom btn-lg">Actualizar Usuario</button>
-                        <button class="btn btn-custom btn-lg" onclick="window.location.href='{{ route('gestion_usuarios') }}'">Volver</button>
                     </div>
                 </form>
+                <div class="d-flex align-items-center justify-content-center mt-3">
+                    <button class="btn btn-custom btn-lg" onclick="window.location.href='{{ route('gestion_usuarios') }}'">Volver</button>
+                </div>
             </div>
             <div class="card-footer">
                 <p>&copy; 2024 Patitas Solidarias</p>

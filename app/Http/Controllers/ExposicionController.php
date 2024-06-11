@@ -109,11 +109,11 @@ class ExposicionController extends Controller
         return redirect()->route('listar_exposiciones')->with('success', 'Exposicion eliminada correctamente');
     }
 
-    public function crearSesionExposicion($id)
-    {
-        Session::put('idExpo', $id);
+    // public function crearSesionExposicion($id)
+    // {
+    //     Session::put('idExpo', $id);
 
-        // Redirigir a la vista de comprar entradas
-        return redirect()->route('comprar_entradas');
-    }
+    //     // Redirigir a la vista de comprar entradas
+    //     return redirect()->route('comprar_entradas');
+    // }
 }

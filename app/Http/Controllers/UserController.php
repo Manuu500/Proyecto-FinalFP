@@ -14,7 +14,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        // $users = User::all();
+        $users = User::paginate(4);
         return view('gestion_usuarios', compact('users'));
     }
 
@@ -33,14 +34,14 @@ class UserController extends Controller
     {
         try{
             $request->validate([
-                'dni' => 'required',
+                'dni' => ['required', 'string', 'size:9', 'regex:/^[0-9]{8}[A-Z]$/', 'unique:users,dni'],
                 'nombre' => ['required', 'string', 'max:255'],
                 'apellido1' => ['required', 'string', 'max:255'],
                 'apellido2' => ['required', 'string', 'max:255'],
-                'telefono' => ['required','string'],
-                'fechaNacimiento' => 'required',
-                'codPostal' => 'required',
-                'email' => ['required', 'string', 'lowercase', 'email', 'max:255'],
+                'telefono' => ['required', 'string', 'regex:/^[0-9]{9}$/'],
+                'fechaNacimiento' => ['required', 'date'],
+                'codPostal' => ['required', 'integer'],
+                'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email'],
                 'password' => ['required', Rules\Password::defaults()],
             ]);
 
@@ -88,13 +89,13 @@ class UserController extends Controller
     {
         try{
             $request->validate([
-            'dni' => 'required',
+            'dni' => ['required', 'string', 'size:9', 'regex:/^[0-9]{8}[A-Z]$/', 'unique:users,dni'],
             'nombre' => ['required', 'string', 'max:255'],
             'apellido1' => ['required', 'string', 'max:255'],
             'apellido2' => ['required', 'string', 'max:255'],
-            'telefono' => ['required','string'],
-            'fechaNacimiento' => 'required',
-            'codPostal' => 'required',
+            'telefono' => ['required', 'string', 'regex:/^[0-9]{9}$/'],
+            'fechaNacimiento' => ['required', 'date'],
+            'codPostal' => ['required', 'integer'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255'],
         ]);
 

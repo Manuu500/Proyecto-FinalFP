@@ -105,7 +105,7 @@
                             <p class="card-text">Incluye acceso a todas las exposiciones disponibles. </p>
                             <p><b>PRECIO:</b> {{ $tipoEntrada->precio }}$</p>
                             @auth
-                                <button type="button" class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('comprar_entradas', ['tipoEntrada' => $tipoEntrada->id]) }}'">
+                                <button type="button" class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('comprar_entradas', ['tipoEntrada' => $tipoEntrada->id], ['precio' => $tipoEntrada->precio]) }}'">
                                     <label>Comprar</label>
                                 </button>
                             @else

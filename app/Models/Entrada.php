@@ -12,7 +12,7 @@ class Entrada extends Model
 
 
     protected $fillable = [
-        'num_entrada', 'user_id', 'expo_id', 'tipo', 'fecha_hora_visita',
+        'num_entrada', 'user_id', 'tipo_id', 'fecha_hora_visita', 'precio',
         'fecha_hora_fin', 'fecha_compra', 'metodo_pago', 'observaciones'
     ];
 }

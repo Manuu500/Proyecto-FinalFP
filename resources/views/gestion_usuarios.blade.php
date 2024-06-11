@@ -73,7 +73,7 @@
 <body>
     <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col-lg-10 text-center">
+            <div class="col-lg-12 text-center">
                 <h1>USUARIOS REGISTRADOS EN EL SISTEMA</h1>
                 @if (session("status"))
                     <div><h3 style="color:green">{{session("status")}}</h3></div>
@@ -86,9 +86,7 @@
                                 <th class="p-4">Primer apellido</th>
                                 <th class="p-4">Segundo apellido</th>
                                 <th class="p-4">Email</th>
-                                <th class="p-4">Teléfono</th>
                                 <th class="p-4">Fecha de Nacimiento</th>
-                                <th class="p-4">Código Postal</th>
                                 <th class="p-4">DNI</th>
                                 <th class="p-4">Tipo</th>
                                 <th class="p-4">Operaciones</th>
@@ -101,9 +99,7 @@
                                     <td>{{$user->apellido1}}</td>
                                     <td>{{$user->apellido2}}</td>
                                     <td>{{$user->email}}</td>
-                                    <td>{{$user->telefono}}</td>
                                     <td>{{$user->fechaNacimiento}}</td>
-                                    <td>{{$user->codPostal}}</td>
                                     <td>{{$user->dni}}</td>
                                     <td>{{$user->tipo}}</td>
                                     <td>
@@ -118,6 +114,8 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $users->links() }}
+
                 </div>
                 <button class="boton_entradas_obra btn btn-lg mt-4" onclick="window.location.href='{{ route('crear_usuario') }}'">Añadir usuario</button>
                 <button class="boton_entradas_obra btn btn-lg mt-4" onclick="window.location.href='{{ route('index') }}'">Volver</button>
@@ -127,5 +125,15 @@
 
 
 </body>
+
+<script>
+    document.querySelectorAll('form').forEach(form => {
+        form.addEventListener('submit', function(event) {
+            if (!confirm('¿Estás seguro de que deseas eliminar esta usuario?')) {
+                event.preventDefault();
+            }
+        });
+    });
+</script>
 </html>
 

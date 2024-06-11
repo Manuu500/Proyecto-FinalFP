@@ -20,9 +20,9 @@ Route::get('/entradas' , function () {
      return view('entradas');
 })->name('entradas');
 
-Route::get('/comprar_entradas' , function () {
-    return view('comprar_entradas');
-})->name('comprar_entradas')->middleware('auth');
+// Route::get('/comprar_entradas' , function () {
+//     return view('comprar_entradas');
+// })->name('comprar_entradas')->middleware('auth');
 
 Route::get('/crear_obras' , function () {
     return view('crear_obras');
@@ -59,7 +59,7 @@ Route::get('/listar_obras', [ObrasController::class, 'index'])->name('listar_obr
 // Route::post('/cerrar-modal', [ModalController::class, 'cerrarModal'])->name('cerrar.modal');
 
 //Crear sesion que guarde el id de la exposicion a la que se ha clickeado en comprar
-Route::get('/comprar_entradas/{id}', [ExposicionController::class, 'crearSesionExposicion'])->name('comprar_entradas_directo')->middleware('auth');
+// Route::get('/comprar_entradas/{id}', [ExposicionController::class, 'crearSesionExposicion'])->name('comprar_entradas_directo')->middleware('auth');
 
 // HACER DEBUG
 // Route::get('/entradas', [EntradaController::class, 'mostrarTiposEntradas'])->name('entradas');
@@ -92,7 +92,7 @@ Route::put('/user/{id}', [UserController::class, 'update'])->middleware('admin')
 
 //Ruta para coger los tipos de entradas
 Route::get('/entradas', [EntradaController::class, 'index'])->name('entradas');
-Route::get('/comprar_entradas/{tipoEntrada}', [EntradaController::class, 'showPurchasePage'])->name('comprar_entradas');
+Route::get('/comprar_entradas/{tipoEntrada}/{precio}', [EntradaController::class, 'comprar_entradas'])->name('comprar_entradas');
 
 //Ruta para ir al sobre nosotros
 Route::get('/sobrenosotros' , function () {
