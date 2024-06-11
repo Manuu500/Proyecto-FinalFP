@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Entrada;
 use Carbon\Carbon;
@@ -62,6 +63,14 @@ class EntradaController extends Controller
 
         return redirect()->route('index')->with('success', 'Compra realizada con éxito');
     }
+
+    public function ver_entradas($id){
+        // Obtén las entradas compradas por el usuario con el ID dado
+        $entradas = Entrada::where('user_id', $id)->with('tipoEntrada')->get();
+
+        return view('listar_entradas_compradas', compact('entradas'));
+    }
+
 
     // public function comprarDirecto($id, Request $request)
     // {

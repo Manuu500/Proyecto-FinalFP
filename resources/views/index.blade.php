@@ -151,28 +151,32 @@
         <div class="col-sm-8 text-end">
             <div class="btn-group" role="group" aria-label="Botones">
                 @auth
-                <form id="formCerrarSesion" method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button id="botonCerrarSesion" type="submit" class="btn btn-lg boton_normal">Cerrar sesión</button>
-                </form>
-                @if (Auth::user()->tipo == "admin")
-                    <button id="boton_normal" type="button" class="boton_normal btn btn-lg" onclick="window.location.href='{{ route('gestion_usuarios') }}'">
-                        <label>Gestión de Usuarios</label>
+                    <form id="formCerrarSesion" method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button id="botonCerrarSesion" type="submit" class="btn btn-lg boton_normal">Cerrar sesión</button>
+                    </form>
+                    @if (Auth::user()->tipo == "admin")
+                        <button id="boton_normal" type="button" class="boton_normal btn btn-lg" onclick="window.location.href='{{ route('gestion_usuarios') }}'">
+                            <label>Gestión de Usuarios</label>
+                            {{-- <img class="ml-2" width="30px" height="30px" src="../imagenes/ticketazul.png"/> --}}
+                        </button>
+                    @endif
+                    <button type="button" class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('entradas') }}'">
+                        <label>Entradas</label>
+                        <img class="ml-2" width="30px" height="30px" src="../imagenes/ticketazul.png"/>
+                    </button>
+                    <button id="boton_normal" type="button" class="boton_normal btn btn-lg" onclick="window.location.href='{{ route('entradas_compradas', ['id' => auth()->id()]) }}'">
+                        <label>Ver entradas adquiridas</label>
                         {{-- <img class="ml-2" width="30px" height="30px" src="../imagenes/ticketazul.png"/> --}}
                     </button>
-                @endif
-                <button type="button" class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('entradas') }}'">
-                    <label>Entradas</label>
-                    <img class="ml-2" width="30px" height="30px" src="../imagenes/ticketazul.png"/>
-                </button>
                 @else
-                <button type="button" class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('entradas') }}'">
-                    <label>Entradas</label>
-                    <img class="ml-2" width="30px" height="30px" src="../imagenes/ticketazul.png"/>
-                </button>
-                <button id="boton_normal" type="button" class="boton_normal btn btn-lg" onclick="window.location.href='{{ route('login') }}'">
-                    <label>Iniciar sesión</label>
-                </button>
+                    <button type="button" class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('entradas') }}'">
+                        <label>Entradas</label>
+                        <img class="ml-2" width="30px" height="30px" src="../imagenes/ticketazul.png"/>
+                    </button>
+                    <button id="boton_normal" type="button" class="boton_normal btn btn-lg" onclick="window.location.href='{{ route('login') }}'">
+                        <label>Iniciar sesión</label>
+                    </button>
                 @endauth
             </div>
         </div>

@@ -15,4 +15,9 @@ class Entrada extends Model
         'num_entrada', 'user_id', 'tipo_id', 'fecha_hora_visita', 'precio',
         'fecha_hora_fin', 'fecha_compra', 'metodo_pago', 'observaciones'
     ];
+
+    public function tipoEntrada()
+    {
+        return $this->belongsTo(TipoEntrada::class, 'tipo_id');
+    }
 }

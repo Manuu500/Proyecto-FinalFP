@@ -44,8 +44,15 @@ Route::get('/listar_exposiciones' , function () {
     return view('listar_exposiciones');
 })->name('listar_exposiciones');
 
+// Route::get('/entradas_compradas' , function () {
+//     return view('listar_entradas_compradas');
+// })->name('entradas_compradas');
+
 
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+//Ruta para listar todas las entradas que tiene un usuario
+Route::get('/listar_entradas_compradas/{id}', [EntradaController::class, 'ver_entradas'])->name('entradas_compradas');
 
 //Ruta para listar las exposiciones
 Route::get('/listar_exposiciones', [ExposicionController::class, 'index'])->name('listar_exposiciones');
