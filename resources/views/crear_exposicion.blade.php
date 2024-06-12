@@ -170,7 +170,7 @@
                     <!-- Descripcion -->
                     <div class="mb-3">
                         <p style="font-size: 20px">Descripcion</p>
-                        <x-text-input id="descripcion" class="block mt-1 w-full" type="descripcion" name="descripcion" :value="old('descripcion')" required autocomplete="descripcion" />
+                        <textarea id="descripcion" class="block mt-1 w-full" name="descripcion" required autocomplete="descripcion">{{ old('descripcion') }}</textarea>
                         <x-input-error :messages="$errors->get('descripcion')" class="mt-2" />
                     </div>
 

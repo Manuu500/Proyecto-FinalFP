@@ -55,6 +55,13 @@ class ExposicionController extends Controller
         }
     }
 
+    public function buscar(Request $request)
+{
+        $nombre = $request->input('nombre');
+        $exposiciones = Exposicion::where('nombre', 'like', "%$nombre%")->get();
+        return view('listar_exposiciones', compact('exposiciones'));
+    }
+
     /**
      * Display the specified resource.
      */

@@ -47,13 +47,14 @@
         }
 
         .divEntradas {
-            background-color: #007bff;
+            background-color:transparent;
             padding: 2rem 0;
         }
 
         .divExpo {
-            background-color: #6c757d;
-            padding: 1.5rem;
+            border: 2px solid cornflowerblue; /* Agrega un borde azul cornflower */
+            background-color: transparent; /* Fondo transparente */
+            padding: 1.5rem; /* Ajusta el padding según sea necesario */
             border-radius: 0.5rem;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
@@ -162,20 +163,27 @@
         </div>
     </div>
 
-    <div class="bg-primary divEntradas py-5">
+    <div class="mb-3 mt-5">
+        <form id="form-buscar" action="{{ route('buscar_exposiciones') }}" method="GET" class="input-group">
+            <input type="text" class="form-control" placeholder="Buscar por nombre..." name="nombre">
+            <button type="submit" class="btn btn-primary px-4">Buscar</button>
+        </form>
+    </div>
+
+    <div class="divEntradas py-5">
         <div class="container">
             @foreach ($exposiciones as $exposicion)
                 <div class="row mb-4">
-                    <div class="divExpo bg-secondary w-100 p-4 rounded shadow-sm">
-                        <div class="row d-flex align-items-center justify-content-between">
-                            <div class="col-sm-3">
+                    <div class="divExpo w-100 p-4 rounded shadow-sm" style="background-color: #1a1a1a; color: #ffffff;">
+                        <div class="row align-items-center justify-content-between">
+                            <div class="col-md-3 mb-3 mb-md-0">
                                 <h4 class="text-center">
-                                    <img class="img-fluid rounded-circle" src="../imagenes/blob-modified.png" alt="Exposition Image"/>
+                                    <img class="img-fluid rounded-circle max-width-100" src="../imagenes/blob-modified.png" alt="Exposition Image"/>
                                 </h4>
                             </div>
-                            <div class="col">
+                            <div class="col-md">
                                 <div class="row mb-2">
-                                    <h2 class="text-center">{{ $exposicion->nombre }}</h2>
+                                    <h2 class="color-letra text-center">{{ $exposicion->nombre }}</h2>
                                 </div>
                                 <div class="row">
                                     <p class="text-center">{{ $exposicion->descripcion }}</p>
@@ -228,7 +236,7 @@
 </body>
 
 <script>
-    document.querySelectorAll('form').forEach(form => {
+    document.querySelectorAll('form:not(#form-buscar)').forEach(form => {
         form.addEventListener('submit', function(event) {
             if (!confirm('¿Estás seguro de que deseas eliminar esta exposición?')) {
                 event.preventDefault();

@@ -48,8 +48,10 @@ Route::get('/listar_exposiciones' , function () {
 //     return view('listar_entradas_compradas');
 // })->name('entradas_compradas');
 
-//Ruta para buscar una obra en específico
+//Ruta para buscar una obra / exposicion en específico
 Route::get('/buscar-obras', [ObrasController::class, 'buscar'])->name('buscar_obras');
+Route::get('/buscar-exposiciones', [ExposicionController::class, 'buscar'])->name('buscar_exposiciones');
+
 
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
