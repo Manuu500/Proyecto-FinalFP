@@ -197,7 +197,7 @@
         }).addTo(map);
 
         L.marker([36.7196492707999, -4.421542817339294]).addTo(map)
-            .bindPopup('¡Hola desde el centro de Málaga!')
+            .bindPopup('¡Nos situamos aquí!')
             .openPopup();
     });
 

@@ -168,8 +168,8 @@
 
                     <!-- Descripcion -->
                     <div class="mb-3">
-                        <p style="font-size: 20px">Descripcion</p>
-                        <x-text-input id="descripcion" class="block mt-1 w-full" type="descripcion" name="descripcion" required autocomplete="descripcion" />
+                        <label for="descripcion" class="form-label" style="font-size: 20px">Descripción</label>
+                        <textarea id="descripcion" class="form-control block mt-1 w-full" name="descripcion" required autocomplete="descripcion" rows="5"></textarea>
                         <x-input-error :messages="$errors->get('descripcion')" class="mt-2" />
                     </div>
 

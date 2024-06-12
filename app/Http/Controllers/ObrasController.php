@@ -47,7 +47,7 @@ class ObrasController extends Controller
                 'nombre' => $request->nombre,
                 'descripcion' => $request->descripcion,
                 'artista' => $request->artista,
-                'fecha_creacion' => Carbon::now(), // Obtener solo la fecha actual
+                'fecha_creacion' => $request->fecha_creacion, // Obtener solo la fecha actual
                 'foto' => $request->foto
             ]);
 
@@ -72,6 +72,13 @@ class ObrasController extends Controller
     public function show(string $id)
     {
         //
+    }
+
+    public function buscar(Request $request)
+{
+        $nombre = $request->input('nombre');
+        $obras = Obra::where('nombre', 'like', "%$nombre%")->get();
+        return view('listar_obras', compact('obras'));
     }
 
     /**

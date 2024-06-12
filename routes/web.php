@@ -48,9 +48,12 @@ Route::get('/listar_exposiciones' , function () {
 //     return view('listar_entradas_compradas');
 // })->name('entradas_compradas');
 
+//Ruta para buscar una obra en específico
+Route::get('/buscar-obras', [ObrasController::class, 'buscar'])->name('buscar_obras');
 
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
+//Ruta para mostrar el mapa
 Route::get('/leaflet-map', [App\Http\Controllers\MapController::class, 'leaflet']);
 
 //Ruta para listar todas las entradas que tiene un usuario

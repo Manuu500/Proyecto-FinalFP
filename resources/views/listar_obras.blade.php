@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <title>Listar Exposiciones</title>
+    <title>Obras</title>
     <style>
         /* Estilos para el encabezado */
         .header {
@@ -47,13 +47,14 @@
         }
 
         .divEntradas {
-            background-color: #007bff;
+            /* background-color: #007bff; */
             padding: 2rem 0;
         }
 
         .divExpo {
-            background-color: #6c757d;
-            padding: 1.5rem;
+            border: 2px solid cornflowerblue; /* Agrega un borde azul cornflower */
+            background-color: transparent; /* Fondo transparente */
+            padding: 1.5rem; /* Ajusta el padding según sea necesario */
             border-radius: 0.5rem;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
@@ -133,8 +134,37 @@
             background-color: rgb(0, 255, 0);
             border: 1px solid rgb(0, 0, 0);
             color: rgb(0, 0, 0);
-            width: auto; /* Ajusta el ancho automático */
-            margin-right: 10px; /* Espacio entre botones */
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .image-container {
+            max-width: 100%; /
+            /* max-width: 300px; Define el ancho máximo del contenedor */
+            max-height: 300px;
+            width: auto;
+            height: auto;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .color-letra{
+            color: black; /* Cambia el color del texto a negro */
+        }
+
+        .input-group {
+            margin-bottom: 20px; /* Espacio inferior entre la barra de búsqueda y el contenido */
+        }
+
+        .form-control {
+            border-radius: 25px; /* Bordes redondeados para la barra de búsqueda */
+        }
+
+        .btn-primary {
+            border-radius: 25px; /* Bordes redondeados para el botón de búsqueda */
+            padding: 10px 20px; /* Aumenta el espacio interno del botón */
         }
     </style>
 </head>
@@ -166,38 +196,55 @@
         </div>
     </div>
 
-    <div class="bg-primary divEntradas py-5">
+    <div class="mb-3 mt-5">
+        <form id="form-buscar" action="{{ route('buscar_obras') }}" method="GET" class="input-group">
+            <input type="text" class="form-control" placeholder="Buscar por nombre..." name="nombre">
+            <button type="submit" class="btn btn-primary px-4">Buscar</button>
+        </form>
+    </div>
+
+    <div class="divEntradas py-5">
         <div class="container">
             @foreach ($obras as $obra)
-                <div class="row mb-4">
-                    <div class="divExpo bg-secondary w-100 p-4 rounded shadow-sm">
-                        <div class="row d-flex align-items-center justify-content-between">
-                            <div class="col-sm-3">
-                                <h4 class="text-center">
-                                    <img class="img-fluid rounded-circle" src="{{ asset('/storage/imagenes/' . $obra->foto) }}" alt="Exposition Image"/>
-                                </h4>
+            <div class="row mb-4">
+                <div class="divExpo w-100 p-4 rounded shadow-sm" style="background-color: #1a1a1a; color: #ffffff;">
+                    <div class="row d-flex align-items-center justify-content-between">
+                        <div class="col-sm-3">
+                            <h4 class="text-center">
+                                <div class="image-container">
+                                    <img class="custom-image" src="{{ asset('/storage/imagenes/' . $obra->foto) }}" alt="Exposition Image"/>
+                                </div>
+                            </h4>
+                        </div>
+                        <div class="col">
+                            <div class="row mb-2">
+                                <h2 class="text-center">{{ $obra->nombre }}</h2>
                             </div>
-                            <div class="col">
-                                <div class="row mb-2">
-                                    <h2 class="text-center">{{ $obra->nombre }}</h2>
-                                </div>
-                                <div class="row">
-                                    <p class="text-center">{{ $obra->descripcion }}</p>
-                                </div>
-                                <div class="row botones-comprar-container">
-                                    @if (Auth::user()->tipo == "admin")
-                                        <form action="{{ route('obra.destroy', $obra->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="boton_entradas_obra btn btn-lg">Borrar Obra</button>
-                                        </form>
-                                        <button class="boton_entradas_obra_crear btn btn-lg" onclick="window.location.href='{{ route('obra.edit', ['id' => $obra->id])}}'">Editar obra</button>
-                                    @endif
-                                </div>
+                            <div class="row">
+                                <p class="text-center">{{ $obra->descripcion }}</p>
+                            </div>
+                            <div class="row">
+                                <p class="text-center"><strong>El artista:</strong> {{ $obra->artista }}</p>
+                            </div>
+
+                            <div class="row">
+                                <p class="text-center">Fecha de creación: {{ $obra->fecha_creacion }}</p>
+                            </div>
+                            <div class="row botones-comprar-container">
+                                @if (Auth::user()->tipo == "admin")
+                                    <form action="{{ route('obra.destroy', $obra->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="boton_entradas_obra btn btn-lg">Borrar Obra</button>
+                                    </form>
+                                    <button class="boton_entradas_obra_crear btn btn-lg" onclick="window.location.href='{{ route('obra.edit', ['id' => $obra->id])}}'">Editar obra</button>
+                                @endif
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+
             @endforeach
             @if (Auth::user()->tipo == "admin")
             <button class="boton_entradas_obra_crear btn btn-lg" onclick="window.location.href='{{ route('crear_obras') }}'">Crear nueva obra</button>
@@ -207,7 +254,7 @@
 </body>
 
 <script>
-    document.querySelectorAll('form').forEach(form => {
+    document.querySelectorAll('form:not(#form-buscar)').forEach(form => {
         form.addEventListener('submit', function(event) {
             if (!confirm('¿Estás seguro de que deseas eliminar esta obra?')) {
                 event.preventDefault();
