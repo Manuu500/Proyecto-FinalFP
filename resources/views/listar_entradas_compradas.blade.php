@@ -171,6 +171,7 @@
                             <th scope="col">Tipo</th>
                             <th scope="col">Precio</th>
                             <th scope="col">Cantidad</th>
+                            <th scope="col">Método de pago</th>
                             <th scope="col">Fecha de compra</th>
 
                         </tr>
@@ -182,6 +183,7 @@
                                 <td>{{ $entrada->tipoEntrada->nombre }}</td>
                                 <td>{{ $entrada->tipoEntrada->precio }}</td>
                                 <td>{{ $entrada->num_entrada}}</td>
+                                <td>{{ $entrada->metodo_pago}}</td>
                                 <td>{{ $entrada->fecha_compra}}</td>
                             </tr>
                         @endforeach

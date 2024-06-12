@@ -183,7 +183,7 @@
                                 <div class="row botones-comprar-container">
                                     @if (Auth::check())
                                         @if (session('entrada'))
-                                            <button class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('comprar_entradas_directo', ['id' => $exposicion->id]) }}'">Comprar la entrada</button>
+                                            {{-- <button class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('comprar_entradas_directo', ['id' => $exposicion->id]) }}'">Comprar la entrada</button> --}}
                                             @if (Auth::user()->tipo == "admin")
                                             <form action="{{ route('expo.destroy', $exposicion->id) }}" method="POST">
                                                 @csrf
@@ -192,7 +192,7 @@
                                             </form>
                                             @endif
                                         @else
-                                            <button class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('comprar_entradas_directo', ['id' => $exposicion->id]) }}'">Comprar la entrada</button>
+                                            {{-- <button class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('comprar_entradas_directo', ['id' => $exposicion->id]) }}'">Comprar la entrada</button> --}}
                                             @if (Auth::user()->tipo == "admin")
                                             <form action="{{ route('expo.destroy', $exposicion->id) }}" method="POST">
                                                 @csrf

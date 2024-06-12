@@ -66,7 +66,7 @@ class EntradaController extends Controller
 
     public function ver_entradas($id){
         // Obtén las entradas compradas por el usuario con el ID dado
-        $entradas = Entrada::where('user_id', $id)->with('tipoEntrada')->get();
+        $entradas = Entrada::where('user_id', $id)->with('tipoEntrada')->orderBy('created_at', 'desc')->get();
 
         return view('listar_entradas_compradas', compact('entradas'));
     }
