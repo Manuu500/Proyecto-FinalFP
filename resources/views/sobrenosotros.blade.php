@@ -5,10 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@2"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <title>Sobre nosotros</title>
 
@@ -118,6 +122,11 @@
             overflow: hidden;
         }
 
+        #map {
+            height: 400px; /* Define a height for the map */
+            width: 100%;
+        }
+
     </style>
 </head>
 <body>
@@ -134,7 +143,6 @@
     </div>
 </header>
 
-
 <section class="container-fluid div-fondo">
     <div class="row">
         <div class="col-sm-12 align-items-center">
@@ -147,35 +155,53 @@
 <section class="div-aboutus">
     <div class="row">
         <div class="col-sm-6 d-flex align-items-center justify-content-center">
-            <div class="col letra2">
-                <div class="row m-4 mt-3 text-center"> <!-- Ajuste del margen superior aquí -->
-                    <h1 style="margin-top: 20px;">¿Cuál es nuestra historia?</h1> <!-- Ajuste del margen superior aquí -->
+            <div class="letra2">
+                <div class="row m-4 mt-3 text-center">
+                    <h1>¿Cuál es nuestra historia?</h1>
                 </div>
                 <div class="row m-4 mt-5 mb-5">
                     <h4>
-                        <p>El Museo Urbano de Málaga tiene una historia tan fascinante como las exposiciones que
-                            alberga. Fue fundado en el año 1984 por Manuel Urbano, un apasionado coleccionista y amante
-                            del arte con una visión única.
-                        </p>
-                        <p class="mt-5">
-                            Desde su inauguración, el Museo Urbano se ha convertido en un pilar cultural de Málaga. Las
-                            exposiciones, que abarcan desde arte renacentista hasta arte contemporáneo, así como una
-                            vasta colección de artefactos históricos, reflejan la pasión y dedicación de Manuel.
-                        </p>
+                        <p>El Museo Urbano de Málaga tiene una historia tan fascinante como las exposiciones que alberga. Fue fundado en el año 1984 por Manuel Urbano, un apasionado coleccionista y amante del arte con una visión única.</p>
+                        <p class="mt-5">Desde su inauguración, el Museo Urbano se ha convertido en un pilar cultural de Málaga. Las exposiciones, que abarcan desde arte renacentista hasta arte contemporáneo, así como una vasta colección de artefactos históricos, reflejan la pasión y dedicación de Manuel.</p>
                     </h4>
                 </div>
             </div>
         </div>
         <div class="col-sm-6 d-flex align-items-center justify-content-center">
-            <img src="../imagenes/creador_museo.jpg" class="img-fluid"
-                style="width: 100%; height: 100%; object-fit: cover;" />
+            <img src="../imagenes/creador_museo.jpg" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;" />
+        </div>
+    </div>
+
+
+</section>
+
+<section>
+    <div class="col">
+        <div class="row-sm-12">
+            <h3 class="text-center mt-5">¿Dónde nos ubicamos?</h3>
+            <div id="map"></div>
         </div>
     </div>
 </section>
 
 
 
+<script>
 
 
+    document.addEventListener('DOMContentLoaded', function() {
+        var map = L.map('map').setView([51.505, -0.09], 13);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        L.marker([36.7196492707999, -4.421542817339294]).addTo(map)
+            .bindPopup('¡Hola desde el centro de Málaga!')
+            .openPopup();
+    });
+
+    //36.7196492707999, -4.421542817339294
+</script>
 </body>
 </html>

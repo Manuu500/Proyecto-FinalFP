@@ -51,6 +51,8 @@ Route::get('/listar_exposiciones' , function () {
 
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
+Route::get('/leaflet-map', [App\Http\Controllers\MapController::class, 'leaflet']);
+
 //Ruta para listar todas las entradas que tiene un usuario
 Route::get('/listar_entradas_compradas/{id}', [EntradaController::class, 'ver_entradas'])->name('entradas_compradas');
 
