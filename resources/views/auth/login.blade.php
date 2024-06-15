@@ -1,29 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta charset="UTF-8">
-    <link rel="icon" href="{{ asset('imagenes/patitas_solidarias.jpg') }}" type="image/x-icon">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <style>
-        .custom-bg-color {
-            background-color: #fbf2d5;
-        }
-    </style>
-    <title>Log In</title>
-</head>
-<body style="background-color: #fbf2d5;">
+<x-app-layout>
     <div class="container d-flex flex-column align-items-center justify-content-center" style="height: 100vh;">
-        <img src="../imagenes/blob-modified.png" style="width: 150px; height: 150px">
+        {{-- <img src="../imagenes/blob-modified.png" style="width: 150px; height: 150px"> --}}
         <h1 class="mb-4">Iniciar sesión</h1>
         <div class="card" style="width: 34rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             <div class="card-body d-flex flex-column align-items-center justify-content-center">
@@ -74,12 +51,4 @@
             </div>
         </div>
     </div>
-
-</body>
-</html>
-
-
-
-
-
-
+</x-app-layout>

@@ -1,4 +1,96 @@
-<!DOCTYPE html>
+<x-app-layout>
+    <div class="divTexto div d-flex justify-content-center align-items-center">
+        <div class="row">
+            <div class="col">
+                <h1 class="text-center">EXPOSICIONES</h1>
+                <h2 class="text-center">En esta sección podrá consultar todas las secciones disponibles en nuestro museo.</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-3 mt-5">
+        <form id="form-buscar" action="{{ route('buscar_exposiciones') }}" method="GET" class="input-group">
+            <input type="text" class="form-control" placeholder="Buscar por nombre..." name="nombre">
+            <button type="submit" class="btn btn-primary px-4">Buscar</button>
+        </form>
+    </div>
+
+    <div class="divEntradas py-5">
+        <div class="container">
+            @foreach ($exposiciones as $exposicion)
+                <div class="row mb-4">
+                    <div class="divExpo w-100 p-4 rounded shadow-sm" style="background-color: #1a1a1a; color: #ffffff;">
+                        <div class="row align-items-center justify-content-between">
+                            <div class="col-md-3 mb-3 mb-md-0">
+                                <h4 class="text-center">
+                                    <img class="img-fluid rounded-circle max-width-100" src="../imagenes/blob-modified.png" alt="Exposition Image"/>
+                                </h4>
+                            </div>
+                            <div class="col-md">
+                                <div class="row mb-2">
+                                    <h2 class="color-letra text-center">{{ $exposicion->nombre }}</h2>
+                                </div>
+                                <div class="row">
+                                    <p class="text-center">{{ $exposicion->descripcion }}</p>
+                                </div>
+                                <div class="row botones-comprar-container">
+                                    @if (Auth::check())
+                                        @if (session('entrada'))
+                                            {{-- <button class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('comprar_entradas_directo', ['id' => $exposicion->id]) }}'">Comprar la entrada</button> --}}
+                                            @if (Auth::user()->tipo == "admin")
+                                            <form action="{{ route('expo.destroy', $exposicion->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="boton_entradas_obra btn btn-lg" onclick="">Borrar Exposicion</button>
+                                            </form>
+                                            @endif
+                                        @else
+                                            {{-- <button class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('comprar_entradas_directo', ['id' => $exposicion->id]) }}'">Comprar la entrada</button> --}}
+                                            @if (Auth::user()->tipo == "admin")
+                                            <form action="{{ route('expo.destroy', $exposicion->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="boton_borrar_expo btn btn-lg" onclick="">Borrar Exposicion</button>
+                                            </form>
+
+                                            <button class="boton_borrar_expo btn btn-lg" onclick="window.location.href='{{ route('expo.edit', ['id' => $exposicion->id]) }}'">Editar </button>
+
+                                            @endif
+                                        @endif
+                                    @else
+                                        <button class="boton_borrar_expo btn btn-lg" onclick="window.location.href='{{ route('login') }}'">Comprar la entrada</button>
+                                        {{-- <form action="{{ route('expo.destroy', $exposicion->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="boton_borrar_expo btn btn-lg" onclick="">Borrar Exposicion</button>
+                                        </form> --}}
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+            @auth
+            @if (Auth::user()->tipo == "admin")
+            <button class="boton_entradas_exposicion_crear btn btn-lg" onclick="window.location.href='{{ route('crear_exposiciones') }}'">Crear nueva exposición</button>
+            @endif
+            @endauth
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('form:not(#form-buscar)').forEach(form => {
+            form.addEventListener('submit', function(event) {
+                if (!confirm('¿Estás seguro de que deseas eliminar esta exposición?')) {
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
+</x-app-layout>
+
+{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -154,94 +246,8 @@
         </div>
     </header>
 
-    <div class="divTexto div d-flex justify-content-center align-items-center">
-        <div class="row">
-            <div class="col">
-                <h1 class="text-center">EXPOSICIONES</h1>
-                <h2 class="text-center">En esta sección podrá consultar todas las secciones disponibles en nuestro museo.</h2>
-            </div>
-        </div>
-    </div>
 
-    <div class="mb-3 mt-5">
-        <form id="form-buscar" action="{{ route('buscar_exposiciones') }}" method="GET" class="input-group">
-            <input type="text" class="form-control" placeholder="Buscar por nombre..." name="nombre">
-            <button type="submit" class="btn btn-primary px-4">Buscar</button>
-        </form>
-    </div>
+</body> --}}
 
-    <div class="divEntradas py-5">
-        <div class="container">
-            @foreach ($exposiciones as $exposicion)
-                <div class="row mb-4">
-                    <div class="divExpo w-100 p-4 rounded shadow-sm" style="background-color: #1a1a1a; color: #ffffff;">
-                        <div class="row align-items-center justify-content-between">
-                            <div class="col-md-3 mb-3 mb-md-0">
-                                <h4 class="text-center">
-                                    <img class="img-fluid rounded-circle max-width-100" src="../imagenes/blob-modified.png" alt="Exposition Image"/>
-                                </h4>
-                            </div>
-                            <div class="col-md">
-                                <div class="row mb-2">
-                                    <h2 class="color-letra text-center">{{ $exposicion->nombre }}</h2>
-                                </div>
-                                <div class="row">
-                                    <p class="text-center">{{ $exposicion->descripcion }}</p>
-                                </div>
-                                <div class="row botones-comprar-container">
-                                    @if (Auth::check())
-                                        @if (session('entrada'))
-                                            {{-- <button class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('comprar_entradas_directo', ['id' => $exposicion->id]) }}'">Comprar la entrada</button> --}}
-                                            @if (Auth::user()->tipo == "admin")
-                                            <form action="{{ route('expo.destroy', $exposicion->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="boton_entradas_obra btn btn-lg" onclick="">Borrar Exposicion</button>
-                                            </form>
-                                            @endif
-                                        @else
-                                            {{-- <button class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('comprar_entradas_directo', ['id' => $exposicion->id]) }}'">Comprar la entrada</button> --}}
-                                            @if (Auth::user()->tipo == "admin")
-                                            <form action="{{ route('expo.destroy', $exposicion->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="boton_borrar_expo btn btn-lg" onclick="">Borrar Exposicion</button>
-                                            </form>
 
-                                            <button class="boton_borrar_expo btn btn-lg" onclick="window.location.href='{{ route('expo.edit', ['id' => $exposicion->id]) }}'">Editar </button>
-
-                                            @endif
-                                        @endif
-                                    @else
-                                        <button class="boton_borrar_expo btn btn-lg" onclick="window.location.href='{{ route('login') }}'">Comprar la entrada</button>
-                                        {{-- <form action="{{ route('expo.destroy', $exposicion->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="boton_borrar_expo btn btn-lg" onclick="">Borrar Exposicion</button>
-                                        </form> --}}
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-            @auth
-            @if (Auth::user()->tipo == "admin")
-            <button class="boton_entradas_exposicion_crear btn btn-lg" onclick="window.location.href='{{ route('crear_exposiciones') }}'">Crear nueva exposición</button>
-            @endif
-            @endauth
-        </div>
-    </div>
-</body>
-
-<script>
-    document.querySelectorAll('form:not(#form-buscar)').forEach(form => {
-        form.addEventListener('submit', function(event) {
-            if (!confirm('¿Estás seguro de que deseas eliminar esta exposición?')) {
-                event.preventDefault();
-            }
-        });
-    });
-</script>
-</html>
+{{-- </html> --}}

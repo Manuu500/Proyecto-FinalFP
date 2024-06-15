@@ -1,4 +1,68 @@
-<!DOCTYPE html>
+<x-app-layout>
+
+<section class="container-fluid div-fondo">
+    <div class="row">
+        <div class="col-sm-12 align-items-center">
+            <h1 class="texto text-center">¿Quiénes somos?</h1>
+            <h2 class="texto text-center mt-5">En Museo de arte pictórico, nos enorgullece ofrecerte exposiciones y obras de la más alta calidad. Ubicados en la hermosa zona de Paseo del Parque en Málaga, nos esforzamos por combinar innovación y tradición para superar tus expectativas.</h2>
+        </div>
+    </div>
+</section>
+
+<section class="div-aboutus">
+    <div class="row">
+        <div class="col-sm-6 d-flex align-items-center justify-content-center">
+            <div class="letra2">
+                <div class="row m-4 mt-3 text-center">
+                    <h1>¿Cuál es nuestra historia?</h1>
+                </div>
+                <div class="row m-4 mt-5 mb-5">
+                    <h4>
+                        <p>El Museo Urbano de Málaga tiene una historia tan fascinante como las exposiciones que alberga. Fue fundado en el año 1984 por Manuel Urbano, un apasionado coleccionista y amante del arte con una visión única.</p>
+                        <p class="mt-5">Desde su inauguración, el Museo Urbano se ha convertido en un pilar cultural de Málaga. Las exposiciones, que abarcan desde arte renacentista hasta arte contemporáneo, así como una vasta colección de artefactos históricos, reflejan la pasión y dedicación de Manuel.</p>
+                    </h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 d-flex align-items-center justify-content-center">
+            <img src="../imagenes/creador_museo.jpg" class="img-fluid" style="width: 100%; height: 100%; object-fit: cover;" />
+        </div>
+    </div>
+
+
+</section>
+
+<section>
+    <div class="col">
+        <div class="row-sm-12">
+            <h3 class="text-center mt-5">¿Dónde nos ubicamos?</h3>
+            <div id="map"></div>
+        </div>
+    </div>
+</section>
+
+
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var map = L.map('map').setView([51.505, -0.09], 13);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        L.marker([36.740227315197764, -4.427181130189693]).addTo(map)
+            .bindPopup('¡Nos situamos aquí!')
+            .openPopup();
+    });
+
+    //36.740227315197764, -4.427181130189693
+    //36.7196492707999, -4.421542817339294
+</script>
+</x-app-layout>
+
+{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -189,6 +253,7 @@
 <script>
 
 
+
     document.addEventListener('DOMContentLoaded', function() {
         var map = L.map('map').setView([51.505, -0.09], 13);
 
@@ -196,12 +261,13 @@
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        L.marker([36.7196492707999, -4.421542817339294]).addTo(map)
+        L.marker([36.740227315197764, -4.427181130189693]).addTo(map)
             .bindPopup('¡Nos situamos aquí!')
             .openPopup();
     });
 
+    //36.740227315197764, -4.427181130189693
     //36.7196492707999, -4.421542817339294
 </script>
 </body>
-</html>
+</html> --}}

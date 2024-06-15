@@ -1,0 +1,17 @@
+#boton_entradas {
+    height: 6vh;
+    border-radius: 0;
+    background-color: transparent;
+    border: 1px solid cornflowerblue;
+    color: cornflowerblue;
+}
+
+#boton_entradas:hover {
+    background-image: url('../imagenes/ticketnegro.png'); /* Nueva imagen para el hover */
+    background-color: cornflowerblue;
+    color: black;
+}
+
+.fondo{
+    background-color: cornflowerblue !important;
+}

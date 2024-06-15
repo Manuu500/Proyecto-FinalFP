@@ -1,0 +1,51 @@
+.divTexto{
+    background-image: url('../imagenes/article.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.img-responsive {
+    width: 100%;
+    height: auto;
+}
+
+.div{
+    color: cornflowerblue;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    -webkit-text-stroke: 0.5px black; /* Para navegadores WebKit (Safari, Chrome, etc.) */
+    height: 600px;
+}
+
+.divEntradas{
+    height: 500px;
+    /* overflow-y: auto; */
+}
+
+.container-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100vh; */
+}
+
+#boton_entradas {
+    height: 6vh;
+    border-radius: 0;
+    background-color: transparent;
+    border: 1px solid cornflowerblue;
+    color: cornflowerblue;
+}
+
+#boton_entradas:hover {
+    background-image: url('../imagenes/ticketnegro.png'); /* Nueva imagen para el hover */
+    background-color: cornflowerblue;
+    color: black;
+}

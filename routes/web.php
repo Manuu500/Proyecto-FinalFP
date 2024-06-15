@@ -51,6 +51,7 @@ Route::get('/listar_exposiciones' , function () {
 //Ruta para buscar una obra / exposicion en específico
 Route::get('/buscar-obras', [ObrasController::class, 'buscar'])->name('buscar_obras');
 Route::get('/buscar-exposiciones', [ExposicionController::class, 'buscar'])->name('buscar_exposiciones');
+// Route::get('/buscar-usuarios', [UserController::class, 'buscar'])->name('buscar_usuarios');
 
 
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');

@@ -1,33 +1,6 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <style>
-    #boton_entradas {
-                height: 6vh;
-                border-radius: 0;
-                background-color: transparent;
-                border: 1px solid cornflowerblue;
-                color: cornflowerblue;
-            }
-
-            #boton_entradas:hover {
-                background-image: url('../imagenes/ticketnegro.png'); /* Nueva imagen para el hover */
-                background-color: cornflowerblue;
-                color: black;
-            }
-    </style>
-</head>
-<body>
-
-    <div class="container d-flex flex-column align-items-center justify-content-center" style="height: 100vh;">
-        <img src="../imagenes/blob-modified.png" style="width: 100px; height: 100px">
+<x-app-layout>
+    <div class="container-fluid d-flex flex-column align-items-center justify-content-center" style="height: 100vh;">
+        {{-- <img src="../imagenes/blob-modified.png" style="width: 100px; height: 100px"> --}}
         <h1 class="mb-4">Registro de cuenta</h1>
         <div class="card" style="width: 34rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             <div class="card-body">
@@ -136,7 +109,4 @@
             </div>
         </div>
     </div>
-
-
-</body>
-</html>
+</x-app-layout>

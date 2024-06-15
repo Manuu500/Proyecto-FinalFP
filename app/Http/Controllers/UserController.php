@@ -73,6 +73,13 @@ class UserController extends Controller
         //
     }
 
+    // public function buscar(Request $request)
+    // {
+    //     $dni = $request->input('dni');
+    //     $users = User::where('dni', 'like', "%$dni%")->get();
+    //     return view('gestion_usuarios', compact('users'));
+    // }
+
     /**
      * Show the form for editing the specified resource.
      */

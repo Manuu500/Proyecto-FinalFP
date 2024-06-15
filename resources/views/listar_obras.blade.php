@@ -1,4 +1,92 @@
-<!DOCTYPE html>
+<x-app-layout>
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    <div class="divTexto div d-flex justify-content-center align-items-center">
+        <div class="row">
+            <div class="col">
+                <h1 class="text-center">OBRAS</h1>
+                <h2 class="text-center">En esta sección podrá consultar todas las obras disponibles en nuestra página web.</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-3 mt-5">
+        <form id="form-buscar" action="{{ route('buscar_obras') }}" method="GET" class="input-group">
+            <input type="text" class="form-control" placeholder="Buscar por nombre..." name="nombre">
+            <button type="submit" class="btn btn-primary px-4">Buscar</button>
+        </form>
+    </div>
+
+    <div class="divEntradas py-5">
+        <div class="container">
+            @foreach ($obras as $obra)
+            <div class="row mb-4">
+                <div class="divExpo w-100 p-4 rounded shadow-sm" style="background-color: #1a1a1a; color: #ffffff;">
+                    <div class="row d-flex align-items-center justify-content-between">
+                        <div class="col-sm-3">
+                            <h4 class="text-center">
+                                <div class="image-container">
+                                    <img class="custom-image" src="{{ asset('/storage/imagenes/' . $obra->foto) }}" alt="Exposition Image"/>
+                                </div>
+                            </h4>
+                        </div>
+                        <div class="col">
+                            <div class="row mb-2">
+                                <h2 class="text-center">{{ $obra->nombre }}</h2>
+                            </div>
+                            <div class="row">
+                                <p class="text-center">{{ $obra->descripcion }}</p>
+                            </div>
+                            <div class="row">
+                                <p class="text-center"><strong>El artista:</strong> {{ $obra->artista }}</p>
+                            </div>
+
+                            <div class="row">
+                                <p class="text-center">Fecha de creación: {{ $obra->fecha_creacion }}</p>
+                            </div>
+                            <div class="row botones-comprar-container">
+                                @auth
+                                @if (Auth::user()->tipo == "admin")
+                                    <form action="{{ route('obra.destroy', $obra->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="boton_entradas_obra btn btn-lg">Borrar Obra</button>
+                                    </form>
+                                    <button class="boton_entradas_obra_crear btn btn-lg" onclick="window.location.href='{{ route('obra.edit', ['id' => $obra->id])}}'">Editar obra</button>
+                                @endif
+                                @endauth
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @endforeach
+            @auth
+            @if (Auth::user()->tipo == "admin")
+            <button class="boton_entradas_obra_crear btn btn-lg" onclick="window.location.href='{{ route('crear_obras') }}'">Crear nueva obra</button>
+            @endif
+            @endauth
+
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('form:not(#form-buscar)').forEach(form => {
+            form.addEventListener('submit', function(event) {
+                if (!confirm('¿Estás seguro de que deseas eliminar esta obra?')) {
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
+</x-app-layout>
+
+{{-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -262,4 +350,4 @@
         });
     });
 </script>
-</html>
+</html> --}}

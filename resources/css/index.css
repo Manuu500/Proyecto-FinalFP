@@ -1,0 +1,123 @@
+header {
+    position: fixed;
+    color: cornflowerblue;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    top: 0;
+    width: 100%;
+    z-index: 3;
+}
+
+.div-fondo {
+    /* filter: brightness(0.7); */
+    width: 100%;
+    height: 80vh;
+    background-image: url('../../public/imagenes/Museo2.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: cornflowerblue;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    -webkit-text-stroke: 0.5px black; /* Para navegadores WebKit (Safari, Chrome, etc.) */
+    transition: background-size 0.3s ease;
+    background-size: 100%;
+}
+
+.div-fondo:hover {
+    background-size: 110%; /* Hacer zoom en la imagen al pasar el ratón */
+}
+
+
+.div-obras {
+    /* filter: brightness(0.7); */
+    background-image: url('../../public/imagenes/persistencia.png');
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 60vh;
+    background-color: aqua;
+    color: cornflowerblue;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    -webkit-text-stroke: 0.5px black; /* Para navegadores WebKit (Safari, Chrome, etc.) */
+    transition: background-size 0.3s ease;
+    background-size: 100%;
+}
+
+.div-obras:hover {
+    background-size: 110%;
+    cursor: pointer !important;
+}
+
+.div-expos{
+    /* filter: brightness(0.7); */
+    background-image: url('../../public/imagenes/perro_exposicion.png');
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 60vh;
+    background-color: coral;
+    color: cornflowerblue;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    -webkit-text-stroke: 0.5px black; /* Para navegadores WebKit (Safari, Chrome, etc.) */
+    transition: background-size 0.3s ease;
+    background-size: 100%;
+}
+
+.div-expos:hover{
+    background-size: 110%;
+    cursor: pointer !important;
+}
+
+.div-aboutus{
+    /* filter: brightness(0.7); */
+    background-color: aquamarine;
+    background-image: url('../../public/imagenes/exposicionfamosa.png');
+    width: 100%;
+    height: 70vh;
+    background-color: aqua;
+    color: cornflowerblue;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    -webkit-text-stroke: 0.5px black; /* Para navegadores WebKit (Safari, Chrome, etc.) */
+    background-size: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-size 0.3s ease;
+    background-size: 100%;
+}
+
+.div-aboutus:hover{
+    background-size: 110%;
+    cursor: pointer !important;
+}
+
+.boton_entradas {
+    height: 8vh;
+    border-radius: 0;
+    background-color: transparent;
+    border: 1px solid rgb(255, 174, 0);
+    color: rgb(255, 174, 0);
+}
+
+.boton_entradas:hover {
+    background-image: url('../../public/imagenes/ticketnegro.png'); /* Nueva imagen para el hover */
+    background-color: rgb(255, 174, 0);
+    color: black;
+}
+
+.boton_normal {
+    height: 8vh;
+    border-radius: 0;
+    background-color: transparent;
+    border: 1px solid cornflowerblue;
+    color: cornflowerblue;
+}
+
+.boton_normal:hover {
+    background-image: url('../../public/imagenes/ticketnegro.png'); /* Nueva imagen para el hover */
+    background-color: cornflowerblue;
+    color: black;
+}
