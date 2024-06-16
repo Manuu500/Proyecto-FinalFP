@@ -9,7 +9,7 @@
     </div>
 
 
-    <div class="divEntradas">
+    <div>
         <div class="col">
             <div class="d-flex flex-column align-items-center">
                 @foreach($tiposEntradas as $tipoEntrada)

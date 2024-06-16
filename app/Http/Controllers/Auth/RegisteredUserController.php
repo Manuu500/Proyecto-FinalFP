@@ -31,17 +31,19 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+
+
         $request->validate([
-            'dni' => ['required', 'string', 'size:9', 'regex:/^[0-9]{8}[A-Z]$/', 'unique:users,dni'],
-            'nombre' => ['required', 'string', 'max:255'],
-            'apellido1' => ['required', 'string', 'max:255'],
-            'apellido2' => ['required', 'string', 'max:255'],
-            'telefono' => ['required', 'string', 'regex:/^[0-9]{9}$/'],
-            'fechaNacimiento' => ['required', 'date'],
-            'codPostal' => ['required', 'integer'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-         ]);
+             'dni' => ['required', 'string', 'size:9', 'regex:/^[0-9]{8}[A-Z]$/', 'unique:users,dni'],
+             'nombre' => ['required', 'string', 'max:255'],
+             'apellido1' => ['required', 'string', 'max:255'],
+             'apellido2' => ['required', 'string', 'max:255'],
+             'telefono' => ['required', 'string', 'regex:/^[0-9]{9}$/'],
+             'fechaNacimiento' => ['required'],
+             'codPostal' => ['required', 'integer'],
+             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
 
 
         $user = User::create([
@@ -50,14 +52,15 @@ class RegisteredUserController extends Controller
             'apellido1' => $request->apellido1,
             'apellido2' => $request->apellido2,
             'telefono' => $request->telefono,
-            'fechaNacimiento' => $request->fecha_nacimiento,
+            'fechaNacimiento' => $request->fechaNacimiento,
             'email' => $request->email,
-            'codPostal' => $request->cod_postal,
+            'codPostal' => $request->codPostal,
             'tipo' => 'cliente',
             'password' => Hash::make($request->password),
         ]);
 
-        event(new Registered($user));
+        // dd($user);
+
 
         Auth::login($user);
 

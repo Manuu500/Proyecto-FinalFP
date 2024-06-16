@@ -1,8 +1,31 @@
 <x-app-layout>
     @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
+        {{-- <div class="alert alert-success">
+
+        </div> --}}
+        <div class="modal fade" id="bienvenidaModal" tabindex="-1" aria-labelledby="bienvenidaModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="bienvenidaModalLabel">Bienvenido</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {{ session('success') }}
+                </div>
+                <div class="modal-footer">
+                  <button id="botonCerrarModal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+              </div>
+            </div>
         </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var myModal = new bootstrap.Modal(document.getElementById('bienvenidaModal'));
+                myModal.show();
+            });
+        </script>
     @endif
 
     <div class="divTexto div d-flex justify-content-center align-items-center">
@@ -15,19 +38,24 @@
     </div>
 
     <div class="mb-3 mt-5">
-        <form id="form-buscar" action="{{ route('buscar_exposiciones') }}" method="GET" class="input-group">
-            <input type="text" class="form-control" placeholder="Buscar por nombre..." name="nombre">
-            <button type="submit" class="btn btn-primary px-4">Buscar</button>
-        </form>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6 d-flex justify-content-center">
+                <form id="form-buscar" action="{{ route('buscar_exposiciones') }}" method="GET" class="input-group">
+                    <input type="text" class="form-control input-pequeno" placeholder="Buscar por nombre..." name="nombre">
+                    <button type="submit" class="btn btn-primary px-4">Buscar</button>
+                </form>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
     </div>
 
-    <div class="divEntradas py-5">
+    <div class="divEntradasExpo py-5">
         <div class="container my-5">
             @foreach ($exposiciones as $exposicion)
                 <div class="row mb-4">
                     <div class="divExpo w-100 p-4 rounded shadow-sm" style="background-color: #1a1a1a; color: #ffffff;">
                         <div class="row align-items-center justify-content-between">
-
                             <div class="col w-100">
                                 <h2 class="color-letra text-center mb-3">{{ $exposicion->nombre }}</h2>
                                 <div class="text-center mb-4">
@@ -36,7 +64,6 @@
                                 <div class="text-center">
                                     @if (Auth::check())
                                         @if (session('entrada'))
-                                            {{-- Add your logic here if needed --}}
                                             @if (Auth::user()->tipo == "admin")
                                             <form action="{{ route('expo.destroy', $exposicion->id) }}" method="POST" class="d-inline-block">
                                                 @csrf
@@ -45,7 +72,6 @@
                                             </form>
                                             @endif
                                         @else
-                                            {{-- Add your logic here if needed --}}
                                             @if (Auth::user()->tipo == "admin")
                                             <form action="{{ route('expo.destroy', $exposicion->id) }}" method="POST" class="d-inline-block">
                                                 @csrf
@@ -73,17 +99,8 @@
             @endauth
         </div>
     </div>
-
-    <script>
-        document.querySelectorAll('form:not(#form-buscar)').forEach(form => {
-            form.addEventListener('submit', function(event) {
-                if (!confirm('¿Estás seguro de que deseas eliminar esta exposición?')) {
-                    event.preventDefault();
-                }
-            });
-        });
-    </script>
 </x-app-layout>
+
 
 {{-- <!DOCTYPE html>
 <html lang="en">

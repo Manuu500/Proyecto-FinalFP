@@ -15,13 +15,20 @@
     </div>
 
     <div class="mb-3 mt-5">
-        <form id="form-buscar" action="{{ route('buscar_obras') }}" method="GET" class="input-group">
-            <input type="text" class="form-control" placeholder="Buscar por nombre..." name="nombre">
-            <button type="submit" class="btn btn-primary px-4">Buscar</button>
-        </form>
+        <div class="row">
+            <div class="col-sm-3">
+            </div>
+            <div class="col-sm-6 d-flex justify-center">
+                <form id="form-buscar" action="{{ route('buscar_obras') }}" method="GET" class="input-group">
+                <input type="text" class="form-control input-pequeno" placeholder="Buscar por nombre..." name="nombre">
+                <button type="submit" class="btn btn-primary px-4">Buscar</button>
+                </form>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
     </div>
 
-    <div class="divEntradas py-5">
+    <div class="divEntradasObras py-5">
         <div class="container">
             @foreach ($obras as $obra)
             <div class="row mb-4">

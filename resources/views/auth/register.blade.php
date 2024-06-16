@@ -10,27 +10,23 @@
                     <!-- DNI -->
                     <div class="mb-2">
                         <label for="dni" class="form-label" style="font-size: 18px">DNI</label>
-                        <input type="text" class="form-control" id="dni" name="dni" value="{{ old('dni') }}" required>
+                        <input type="text" class="form-control" id="dni" name="dni" value="{{ old('dni') }}">
                         <x-input-error :messages="$errors->get('dni')" class="mt-2" />
-                            @error('dni')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
+
                     </div>
 
                     <!-- Nombre y Teléfono -->
                     <div class="row mb-2">
                         <div class="col">
                             <label for="nombre" class="form-label" style="font-size: 18px">Nombre</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre" value="{{ old('nombre') }}" required>
+                            <input type="text" class="form-control" id="nombre" name="nombre" value="{{ old('nombre') }}">
                             <x-input-error :messages="$errors->get('nombre')" class="mt-2" />
                         </div>
                         <div class="col">
                             <label for="telefono" class="form-label" style="font-size: 18px">Teléfono</label>
-                            <input type="text" maxlength="9" class="form-control" id="telefono" name="telefono" value="{{ old('telefono') }}" required>
+                            <input type="text" maxlength="9" class="form-control" id="telefono" name="telefono" value="{{ old('telefono') }}">
                             <x-input-error :messages="$errors->get('telefono')" class="mt-2" />
-                            @error('telefono')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
+
                         </div>
                     </div>
 
@@ -38,65 +34,61 @@
                     <div class="row mb-2">
                         <div class="col">
                             <label for="apellido1" class="form-label" style="font-size: 18px">Primer apellido</label>
-                            <input type="text" class="form-control" id="apellido1" name="apellido1" value="{{ old('apellido1') }}" required>
+                            <input type="text" class="form-control" id="apellido1" name="apellido1" value="{{ old('apellido1') }}">
                             <x-input-error :messages="$errors->get('apellido1')" class="mt-2" />
-                            @error('apellido1')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
+
                         </div>
                         <div class="col">
                             <label for="apellido2" class="form-label" style="font-size: 18px">Segundo apellido</label>
-                            <input type="text" class="form-control" id="apellido2" name="apellido2" value="{{ old('apellido2') }}" required>
+                            <input type="text" class="form-control" id="apellido2" name="apellido2" value="{{ old('apellido2') }}">
                             <x-input-error :messages="$errors->get('apellido2')" class="mt-2" />
-                                @error('apellido2')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
+
                         </div>
                     </div>
 
                     <!-- Fecha de Nacimiento y Email -->
                     <div class="row mb-2">
                         <div class="col">
-                            <label for="fecha_nacimiento" class="form-label" style="font-size: 18px">Fecha de nacimiento</label>
-                            <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" value="{{ old('fecha_nacimiento') }}" required>
-                            <x-input-error :messages="$errors->get('fecha_nacimiento')" class="mt-2" />
-                            @error('fecha_nacimiento')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
+                            <label for="fechaNacimiento" class="form-label" style="font-size: 18px">Fecha de nacimiento</label>
+                            <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento" value="{{ old('fecha_nacimiento') }}">
+                            <x-input-error :messages="$errors->get('fechaNacimiento')" class="mt-2" />
+
                         </div>
                         <div class="col">
+                            <label for="codPostal" class="form-label" style="font-size: 18px">Código postal</label>
+                            <input type="text" class="form-control" id="codPostal" name="codPostal" value="{{ old('codPostal') }}">
+                            <x-input-error :messages="$errors->get('codPostal')" class="mt-2" />
+
+                        </div>
+                        {{-- <div class="col">
                             <label for="email" class="form-label" style="font-size: 18px">Correo Electrónico</label>
-                            <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" required>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}">
                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
                             @error('email')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
-                        </div>
+                        </div> --}}
                     </div>
 
                     <!-- Código Postal -->
-                    <div class="mb-2">
-                        <label for="cod_postal" class="form-label" style="font-size: 18px">Código postal</label>
-                        <input type="text" class="form-control" id="cod_postal" name="cod_postal" value="{{ old('cod_postal') }}" required>
-                        <x-input-error :messages="$errors->get('cod_postal')" class="mt-2" />
-                        @error('cod_postal')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                    <div class="col">
+                        <label for="email" class="form-label" style="font-size: 18px">Correo Electrónico</label>
+                        <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}">
+                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
+
                     </div>
 
                     <!-- Contraseña y Confirmar Contraseña -->
                     <div class="row mb-2">
                         <div class="col">
                             <label for="password" class="form-label" style="font-size: 18px">Contraseña</label>
-                            <input type="password" class="form-control" id="password" name="password" required>
+                            <input type="password" class="form-control" id="password" name="password">
                             <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                            @error('password')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
+
                         </div>
                         <div class="col">
                             <label for="password_confirmation" class="form-label" style="font-size: 18px">Confirmar contraseña</label>
-                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
+                            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
                             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                         </div>
                     </div>
