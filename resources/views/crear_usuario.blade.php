@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="container mt-5 mt-4 w-25">
+    <div class="container mt-5 w-25">
         <h1 class="mb-4 page-title-anadirusu text-center-anadirusu">Crear Usuario</h1>
         <div class="card">
             <div class="card-header">
