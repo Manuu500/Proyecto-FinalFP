@@ -1,4 +1,10 @@
 <x-app-layout>
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <div class="divTexto div d-flex justify-content-center align-items-center">
         <div class="row">
             <div class="col">
@@ -16,54 +22,41 @@
     </div>
 
     <div class="divEntradas py-5">
-        <div class="container">
+        <div class="container my-5">
             @foreach ($exposiciones as $exposicion)
                 <div class="row mb-4">
                     <div class="divExpo w-100 p-4 rounded shadow-sm" style="background-color: #1a1a1a; color: #ffffff;">
                         <div class="row align-items-center justify-content-between">
-                            <div class="col-md-3 mb-3 mb-md-0">
-                                <h4 class="text-center">
-                                    <img class="img-fluid rounded-circle max-width-100" src="../imagenes/blob-modified.png" alt="Exposition Image"/>
-                                </h4>
-                            </div>
-                            <div class="col-md">
-                                <div class="row mb-2">
-                                    <h2 class="color-letra text-center">{{ $exposicion->nombre }}</h2>
+
+                            <div class="col w-100">
+                                <h2 class="color-letra text-center mb-3">{{ $exposicion->nombre }}</h2>
+                                <div class="text-center mb-4">
+                                    <p class="text-center mb-0">{{ $exposicion->descripcion }}</p>
                                 </div>
-                                <div class="row">
-                                    <p class="text-center">{{ $exposicion->descripcion }}</p>
-                                </div>
-                                <div class="row botones-comprar-container">
+                                <div class="text-center">
                                     @if (Auth::check())
                                         @if (session('entrada'))
-                                            {{-- <button class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('comprar_entradas_directo', ['id' => $exposicion->id]) }}'">Comprar la entrada</button> --}}
+                                            {{-- Add your logic here if needed --}}
                                             @if (Auth::user()->tipo == "admin")
-                                            <form action="{{ route('expo.destroy', $exposicion->id) }}" method="POST">
+                                            <form action="{{ route('expo.destroy', $exposicion->id) }}" method="POST" class="d-inline-block">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="boton_entradas_obra btn btn-lg" onclick="">Borrar Exposicion</button>
+                                                <button class="btn btn-danger btn-lg">Borrar Exposición</button>
                                             </form>
                                             @endif
                                         @else
-                                            {{-- <button class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('comprar_entradas_directo', ['id' => $exposicion->id]) }}'">Comprar la entrada</button> --}}
+                                            {{-- Add your logic here if needed --}}
                                             @if (Auth::user()->tipo == "admin")
-                                            <form action="{{ route('expo.destroy', $exposicion->id) }}" method="POST">
+                                            <form action="{{ route('expo.destroy', $exposicion->id) }}" method="POST" class="d-inline-block">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="boton_borrar_expo btn btn-lg" onclick="">Borrar Exposicion</button>
+                                                <button class="btn btn-danger btn-lg">Borrar Exposición</button>
                                             </form>
-
-                                            <button class="boton_borrar_expo btn btn-lg" onclick="window.location.href='{{ route('expo.edit', ['id' => $exposicion->id]) }}'">Editar </button>
-
+                                            <button class="btn btn-primary btn-lg" onclick="window.location.href='{{ route('expo.edit', ['id' => $exposicion->id]) }}'">Editar</button>
                                             @endif
                                         @endif
                                     @else
-                                        <button class="boton_borrar_expo btn btn-lg" onclick="window.location.href='{{ route('login') }}'">Comprar la entrada</button>
-                                        {{-- <form action="{{ route('expo.destroy', $exposicion->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="boton_borrar_expo btn btn-lg" onclick="">Borrar Exposicion</button>
-                                        </form> --}}
+                                        <button class="btn btn-success btn-lg" onclick="window.location.href='{{ route('login') }}'">Comprar la entrada</button>
                                     @endif
                                 </div>
                             </div>
@@ -73,7 +66,9 @@
             @endforeach
             @auth
             @if (Auth::user()->tipo == "admin")
-            <button class="boton_entradas_exposicion_crear btn btn-lg" onclick="window.location.href='{{ route('crear_exposiciones') }}'">Crear nueva exposición</button>
+            <div class="text-center mt-4">
+                <button class="btn btn-success btn-lg" onclick="window.location.href='{{ route('crear_exposiciones') }}'">Crear nueva exposición</button>
+            </div>
             @endif
             @endauth
         </div>

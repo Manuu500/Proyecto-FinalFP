@@ -3,6 +3,9 @@
     <head>
 
         <meta charset="UTF-8">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@2"></script>
@@ -11,7 +14,9 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <link rel="stylesheet" href="{{ asset('css/listarobras.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('css/listarobras.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/comprarentradas.css') }}"> --}}
+
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -24,9 +29,24 @@
     @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/sobrenosotros.css',
      'resources/css/listarobras.css', 'resources/css/index.css', 'resources/css/entradas.css', 'resources/css/entradasadquiridas.css',
      'resources/css/gestionusuarios.css', 'resources/css/listarexposiciones.css','resources/css/login.css','resources/css/register.css',
-    ])
+     'resources/css/editarusuario.css', 'resources/css/comprarentradas.css', 'resources/css/editarexposicion.css', 'resources/css/crearexposicion.css',
+     'resources/css/añadirusuario.css'])
 
         <style>
+
+            .boton_entradas {
+                height: 8vh;
+                border-radius: 0;
+                background-color: transparent;
+                border: 1px solid rgb(255, 174, 0);
+                color: rgb(255, 174, 0);
+            }
+
+            .boton_entradas:hover {
+                background-image: url('../../public/imagenes/ticketnegro.png'); /* Nueva imagen para el hover */
+                background-color: rgb(255, 174, 0);
+                color: black;
+            }
 
             .header {
                 position: fixed;
@@ -91,7 +111,7 @@
                                 @endif
                                 <button type="button" class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('entradas') }}'">
                                     <label>Entradas</label>
-                                    <img class="ml-2" width="30px" height="30px" src="../imagenes/ticketazul.png"/>
+                                    {{-- <img class="ml-2" width="30px" height="30px" src="../imagenes/ticketazul.png"/> --}}
                                 </button>
                                 <button id="boton_normal" type="button" class="boton_normal btn btn-lg" onclick="window.location.href='{{ route('entradas_compradas', ['id' => auth()->id()]) }}'">
                                     <label>Ver entradas adquiridas</label>
@@ -100,7 +120,7 @@
                             @else
                                 <button type="button" class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('entradas') }}'">
                                     <label>Entradas</label>
-                                    <img class="ml-2" width="30px" height="30px" src="../imagenes/ticketazul.png"/>
+                                    {{-- <img class="ml-2" width="30px" height="30px" src="../imagenes/ticketazul.png"/> --}}
                                 </button>
                                 <button id="boton_normal" type="button" class="boton_normal btn btn-lg" onclick="window.location.href='{{ route('login') }}'">
                                     <label>Iniciar sesión</label>

@@ -36,7 +36,7 @@
     /* height: 100vh; */
 }
 
-#boton_entradas {
+.boton_entradas_entrada {
     height: 6vh;
     border-radius: 0;
     background-color: transparent;
@@ -44,7 +44,7 @@
     color: cornflowerblue;
 }
 
-#boton_entradas:hover {
+.boton_entradas_entrada:hover {
     background-image: url('../imagenes/ticketnegro.png'); /* Nueva imagen para el hover */
     background-color: cornflowerblue;
     color: black;

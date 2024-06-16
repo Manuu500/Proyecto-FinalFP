@@ -9,11 +9,11 @@
     </div>
 
 
-    <div class="bg-primary divEntradas">
+    <div class="divEntradas">
         <div class="col">
-            <div class="row-sm-12 container-center">
+            <div class="d-flex flex-column align-items-center">
                 @foreach($tiposEntradas as $tipoEntrada)
-                <div style="width: 850px" class="card mt-5">
+                <div class="card mt-5 w-100" style="max-width: 850px;">
                     <div class="card-header d-flex flex-column align-items-center">
                         <h3 class="mb-0">{{ $tipoEntrada->nombre }}</h3>
                     </div>
@@ -26,11 +26,11 @@
                                 <p class="card-text">Incluye acceso a todas las exposiciones disponibles. </p>
                                 <p><b>PRECIO:</b> {{ $tipoEntrada->precio }}$</p>
                                 @auth
-                                    <button type="button" class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('comprar_entradas', ['tipoEntrada' => $tipoEntrada->id, 'precio' => $tipoEntrada->precio]) }}'">
+                                    <button type="button" class="boton_entradas_entrada btn btn-lg" onclick="window.location.href='{{ route('comprar_entradas', ['tipoEntrada' => $tipoEntrada->id, 'precio' => $tipoEntrada->precio]) }}'">
                                         <label>Comprar</label>
                                     </button>
                                 @else
-                                    <button type="button" class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('login') }}'">
+                                    <button type="button" class="boton_entradas_entrada btn btn-lg" onclick="window.location.href='{{ route('login') }}'">
                                         <label>Comprar</label>
                                     </button>
                                 @endauth

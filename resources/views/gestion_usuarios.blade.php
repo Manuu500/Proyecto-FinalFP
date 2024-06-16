@@ -1,24 +1,14 @@
 <x-app-layout>
-
-
-    <div class="container vh-200 mt-custom">
+    <div class="container vh-200 mt-custom"> <!-- La clase mt-custom proporciona el margen superior -->
         <div class="row justify-content-center">
             <div class="col-lg-12 text-center">
-                <h1>USUARIOS REGISTRADOS EN EL SISTEMA</h1>
-
-                {{-- <div class="mb-3 mt-5">
-                    <form id="form-buscar" action="{{ route('buscar_usuarios') }}" method="GET" class="input-group">
-                        <input type="text" class="form-control" placeholder="Buscar por DNI..." name="nombre">
-                        <button type="submit" class="btn btn-primary px-4">Buscar</button>
-                    </form>
-                </div> --}}
-
+                <h1 class="page-title">USUARIOS REGISTRADOS EN EL SISTEMA</h1>
 
                 @if (session("status"))
                     <div><h3 style="color:green">{{session("status")}}</h3></div>
                 @endif
                 <div class="table-responsive">
-                    <table class="table table-bordered text-center">
+                    <table class="table table-bordered text-center table-sm">
                         <thead>
                             <tr>
                                 <th class="p-4">Nombre</th>
@@ -60,17 +50,13 @@
             </div>
         </div>
     </div>
-</body>
-
-<script>
-    document.querySelectorAll('form:not(#form-buscar)').forEach(form => {
-        form.addEventListener('submit', function(event) {
-            if (!confirm('¿Estás seguro de que deseas eliminar esta usuario?')) {
-                event.preventDefault();
-            }
+    <script>
+        document.querySelectorAll('form:not(#form-buscar)').forEach(form => {
+            form.addEventListener('submit', function(event) {
+                if (!confirm('¿Estás seguro de que deseas eliminar esta usuario?')) {
+                    event.preventDefault();
+                }
+            });
         });
-    });
-</script>
+    </script>
 </x-app-layout>
-
-

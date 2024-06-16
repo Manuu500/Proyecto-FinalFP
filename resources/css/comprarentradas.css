@@ -1,0 +1,25 @@
+.entry-control img {
+    margin: 0 10px; /* Ajusta el margen según sea necesario */
+}
+
+.imagen-menos{
+    cursor: pointer;
+}
+
+.imagen-mas{
+    cursor: pointer;
+}
+
+.boton_entradas_comprar {
+    height: 6vh;
+    border-radius: 0;
+    background-color: transparent;
+    border: 1px solid cornflowerblue;
+    color: cornflowerblue;
+}
+
+.boton_entradas_comprar:hover {
+    background-image: url('../imagenes/ticketnegro.png'); /* Nueva imagen para el hover */
+    background-color: cornflowerblue;
+    color: black;
+}

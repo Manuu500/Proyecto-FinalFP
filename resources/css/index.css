@@ -40,7 +40,7 @@ header {
     background-color: aqua;
     color: cornflowerblue;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    -webkit-text-stroke: 0.5px black; /* Para navegadores WebKit (Safari, Chrome, etc.) */
+    -webkit-text-stroke: 0.5px black;
     transition: background-size 0.3s ease;
     background-size: 100%;
 }
@@ -61,7 +61,7 @@ header {
     background-color: coral;
     color: cornflowerblue;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    -webkit-text-stroke: 0.5px black; /* Para navegadores WebKit (Safari, Chrome, etc.) */
+    -webkit-text-stroke: 0.5px black;
     transition: background-size 0.3s ease;
     background-size: 100%;
 }
@@ -80,7 +80,7 @@ header {
     background-color: aqua;
     color: cornflowerblue;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    -webkit-text-stroke: 0.5px black; /* Para navegadores WebKit (Safari, Chrome, etc.) */
+    -webkit-text-stroke: 0.5px black;
     background-size: 100%;
     display: flex;
     justify-content: center;
@@ -103,7 +103,7 @@ header {
 }
 
 .boton_entradas:hover {
-    background-image: url('../../public/imagenes/ticketnegro.png'); /* Nueva imagen para el hover */
+    background-image: url('../imagenes/ticketnegro.png');
     background-color: rgb(255, 174, 0);
     color: black;
 }
@@ -117,7 +117,7 @@ header {
 }
 
 .boton_normal:hover {
-    background-image: url('../../public/imagenes/ticketnegro.png'); /* Nueva imagen para el hover */
+    background-image: url('../imagenes/ticketnegro.png');
     background-color: cornflowerblue;
     color: black;
 }
