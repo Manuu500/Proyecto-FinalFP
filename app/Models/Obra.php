@@ -19,4 +19,9 @@ class Obra extends Model
         'fecha_creacion'
     ];
 
+    public function exposiciones()
+    {
+        return $this->belongsToMany(Exposicion::class, 'exposicion_obra', 'id_obra', 'id_expo');
+    }
+
 }

@@ -1,0 +1,9 @@
+.boton_entradas_editobra {
+    height: 6vh;
+    border-radius: 0;
+    background-color: transparent;
+    border: 1px solid cornflowerblue;
+    color: cornflowerblue;
+    width: auto; /* Ajusta el ancho automático */
+    margin-right: 10px; /* Espacio entre botones */
+}

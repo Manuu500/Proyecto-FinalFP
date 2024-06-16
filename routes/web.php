@@ -24,9 +24,12 @@ Route::get('/entradas' , function () {
 //     return view('comprar_entradas');
 // })->name('comprar_entradas')->middleware('auth');
 
-Route::get('/crear_obras' , function () {
-    return view('crear_obras');
+Route::get('/crear_obras', function () {
+    $exposiciones = App\Models\Exposicion::all(); // Cargar todas las exposiciones desde el modelo Exposicion
+
+    return view('crear_obras', compact('exposiciones'));
 })->name('crear_obras')->middleware('auth');
+
 
 Route::get('/crear_exposiciones' , function () {
     return view('crear_exposicion');

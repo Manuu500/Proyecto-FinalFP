@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Obra;
+use App\Models\Exposicion;
 use Illuminate\Database\QueryException;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
@@ -34,37 +35,40 @@ class ObrasController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            'nombre' => 'required|string|max:255',
-            'descripcion' => 'required|string',
-            'artista' => 'required|string',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+{
+    $request->validate([
+        'nombre' => 'required|string|max:255',
+        'descripcion' => 'required|string',
+        'artista' => 'required|string',
+        'fecha_creacion' => 'required|date',
+        'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+    ]);
+
+    try {
+        $obra = Obra::create([
+            'nombre' => $request->nombre,
+            'descripcion' => $request->descripcion,
+            'artista' => $request->artista,
+            'fecha_creacion' => $request->fecha_creacion,
+            'foto' => $request->foto,
         ]);
 
-        try{
-            $obra = Obra::create([
-                'nombre' => $request->nombre,
-                'descripcion' => $request->descripcion,
-                'artista' => $request->artista,
-                'fecha_creacion' => $request->fecha_creacion, // Obtener solo la fecha actual
-                'foto' => $request->foto
-            ]);
-
-            if ($request->hasFile('foto')) {
-                $nombreFoto = time() . "-" . $request->file('foto')->getClientOriginalName();
-                $obra->foto = $nombreFoto;
-
-                $request->file('foto')->storeAs('public/imagenes', $nombreFoto);
-            }
-
-
+        if ($request->hasFile('foto')) {
+            $nombreFoto = time() . "-" . $request->file('foto')->getClientOriginalName();
+            $request->file('foto')->storeAs('public/imagenes', $nombreFoto);
+            $obra->foto = $nombreFoto;
             $obra->save();
-            return redirect()->route('listar_obras')->with('success', 'La obra de arte ha sido guardada exitosamente.');
-        }catch(QueryException $e){
-            dd($e);
         }
+
+        if ($request->has('exposiciones')) {
+            $obra->exposiciones()->attach($request->exposiciones);
+        }
+
+        return redirect()->route('listar_obras')->with('success', 'La obra de arte ha sido guardada exitosamente.');
+    } catch (QueryException $e) {
+        dd($e);
     }
+}
 
     /**
      * Display the specified resource.
@@ -85,48 +89,53 @@ class ObrasController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
-    {
-        $obra = Obra::findOrFail($id);
-        return view('editar_obras', compact('obra'));
-    }
+{
+    $obra = Obra::findOrFail($id);
+    $exposiciones = Exposicion::all(); // Cargar todas las exposiciones disponibles
+
+    return view('editar_obras', compact('obra', 'exposiciones'));
+}
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {
-        try {
-            $request->validate([
-                'nombre' => 'required|string|max:255',
-                'descripcion' => 'required|string',
-                'artista' => 'required|string',
-                'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            ]);
+{
+    try {
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'descripcion' => 'required|string',
+            'artista' => 'required|string',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
 
-            $obra = Obra::findOrFail($id);
+        $obra = Obra::findOrFail($id);
 
-            if ($request->hasFile('foto')) {
-                if ($obra->foto) {
-                    Storage::delete($obra->foto);
-                }
+        // Actualizar campos de la obra
+        $obra->nombre = $request->nombre;
+        $obra->descripcion = $request->descripcion;
+        $obra->artista = $request->artista;
+        $obra->fecha_creacion = $request->fecha_creacion;
 
-                $nombreFoto = time() .'-'. $request->file('foto')->getClientOriginalName();
-
-                $rutaAlmacenada = $request->file('foto')->storeAs('public/imagenes', $nombreFoto);
-
-                $obra->foto = $nombreFoto;
+        // Manejar la foto si se está actualizando
+        if ($request->hasFile('foto')) {
+            if ($obra->foto) {
+                Storage::delete($obra->foto);
             }
-
-            $obra->update($request->except('foto'));
-            $obra->save();
-            return redirect()->route('listar_obras')->with('success', 'Obra actualizada con éxito');
-        } catch (QueryException $e) {
-            dd($e);
+            $nombreFoto = time() .'-'. $request->file('foto')->getClientOriginalName();
+            $rutaAlmacenada = $request->file('foto')->storeAs('public/imagenes', $nombreFoto);
+            $obra->foto = $nombreFoto;
         }
 
+        // Actualizar relaciones con exposiciones
+        $obra->exposiciones()->sync($request->exposiciones); // Sincronizar exposiciones asociadas
 
-
+        $obra->save();
+        return redirect()->route('listar_obras')->with('success', 'Obra actualizada con éxito');
+    } catch (QueryException $e) {
+        dd($e);
     }
+}
 
     /**
      * Remove the specified resource from storage.

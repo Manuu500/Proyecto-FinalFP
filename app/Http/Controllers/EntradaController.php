@@ -28,39 +28,33 @@ class EntradaController extends Controller
 
     public function store(Request $request)
     {
-
-        $fecha_hora_fin = Carbon::now()->format('Y-m-d H:i:s');
-        $fecha_compra = Carbon::now()->format('Y-m-d H:i:s');
-
-
-        $entrada = Entrada::create([
-            'num_entrada' => $request->num_entrada,
-            'user_id' => auth()->id(),
-            'tipo_id' => $request->tipoEntrada,
-            'fecha_hora_visita' => null,
-            'fecha_hora_fin' => null,
-            'fecha_compra' => $fecha_compra,
-            'observaciones' => "",
-            'precio' => $request->precio,
-            'metodo_pago' => $request->metodo_pago
+        $request->validate([
+            'num_entrada' => 'required|integer|min:1',
+            'tipoEntrada' => 'required|integer',
+            'precio' => 'required|numeric',
+            'metodo_pago' => 'required|string',
         ]);
 
-        // dd($entrada);
+        $cantidad = $request->num_entrada;
+        $user_id = auth()->id();
+        $tipo_id = $request->tipoEntrada;
+        $precio = $request->precio;
+        $metodo_pago = $request->metodo_pago;
+        $fecha_compra = Carbon::now()->format('Y-m-d H:i:s');
 
-        //Depurar
-        // dd($entrada);
-        //Log::info('Datos validados:', $validatedData);
-
-        $entrada->save();
-        // session([
-        //     'compra_realizada' => true,
-        //     'entrada' => $entrada->toArray(),
-        //     'tipoEntrada' => $entrada->tipo,
-        //     'idEntrada' => $entrada->id
-        // ]);
-
-        // dd($entrada->id);
-
+        for ($i = 0; $i < $cantidad; $i++) {
+            $entrada = Entrada::create([
+                'num_entrada' => 1,
+                'user_id' => $user_id,
+                'tipo_id' => $tipo_id,
+                'fecha_hora_visita' => null,
+                'fecha_hora_fin' => null,
+                'fecha_compra' => $fecha_compra,
+                'observaciones' => "",
+                'precio' => $precio,
+                'metodo_pago' => $metodo_pago
+            ]);
+        }
         return redirect()->route('index')->with('success', 'Compra realizada con éxito');
     }
 

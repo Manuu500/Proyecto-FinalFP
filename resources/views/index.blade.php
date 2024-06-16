@@ -1,24 +1,28 @@
 <x-app-layout>
 
     @if (session('success'))
-        <!-- Modal de Bienvenida -->
+        {{-- <div class="alert alert-success">
+
+        </div> --}}
         <div class="modal fade" id="bienvenidaModal" tabindex="-1" aria-labelledby="bienvenidaModalLabel" aria-hidden="true">
             <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="bienvenidaModalLabel">Bienvenido</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
+              <div class="modal-content">
                 <div class="modal-body">
-                ¡Gracias por registrarte en nuestro sitio!
+                    Bienvenido <strong>{{ session('success') }}</strong>!
                 </div>
-                <div class="modal-footer">
                 <button id="botonCerrarModal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                </div>
-            </div>
+              </div>
             </div>
         </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var myModal = new bootstrap.Modal(document.getElementById('bienvenidaModal'));
+                myModal.show();
+            });
+        </script>
     @endif
+
     <section class="div-fondo">
         <div class="row">
             <div class="col-sm-12 align-items-center">
@@ -59,26 +63,5 @@
         </div>
     </section>
 
-
-
-
-    @if (Auth::check())
-    <script>
-
-        var botonCerrar = document.getElementById("botonCerrarModal");
-        var myModal = new bootstrap.Modal(document.getElementById('bienvenidaModal'));
-
-
-        document.addEventListener('DOMContentLoaded', function() {
-            myModal.show();
-        });
-
-        botonCerrar.addEventListener('click', function(){
-            myModal.hide();
-        });
-
-        // document.addEventListener
-    </script>
-    @endif
 
 </x-app-layout>

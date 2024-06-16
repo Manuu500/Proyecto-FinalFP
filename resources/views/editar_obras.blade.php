@@ -1,155 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta charset="UTF-8">
-    <link rel="icon" href="{{ asset('imagenes/patitas_solidarias.jpg') }}" type="image/x-icon">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <style>
-        .custom-bg-color {
-            background-color: #fbf2d5;
-        }
-
-         /* Estilos para el encabezado */
-         .header {
-            background-color: transparent;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 1rem;
-        }
-
-        .header img {
-            transition: transform 0.3s ease;
-        }
-
-        .header img:hover {
-            transform: scale(1.1);
-        }
-
-        /* Estilos para la sección de texto */
-        .divTexto {
-            background-image: url('../imagenes/article.jpg');
-            background-size: cover;
-            background-position: center;
-            padding: 3rem 0;
-            height: 50vh;
-            /* margin-top: 5rem; Añadido para dejar espacio para el header fijo */
-        }
-
-        .divTexto h1, .divTexto h2 {
-            color: cornflowerblue;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            -webkit-text-stroke: 0.5px black;
-            text-align: center;
-            margin-bottom: 1rem;
-        }
-
-        .divEntradas {
-            background-color: #007bff;
-            padding: 2rem 0;
-        }
-
-        .divExpo {
-            background-color: #6c757d;
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .divExpo:hover {
-            transform: translateY(-10px);
-        }
-
-        .divExpo h2 {
-            color: #ffffff;
-            text-align: center;
-        }
-
-        .divExpo p {
-            color: #dcdcdc;
-            text-align: center;
-        }
-
-        .img-fluid {
-            max-width: 100%;
-            height: auto;
-            border-radius: 50%;
-        }
-
-        .img-responsive {
-            width: 100%;
-            height: auto;
-        }
-
-        .container-center {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .boton_entradas {
-            height: 6vh;
-            border-radius: 0;
-            background-color: transparent;
-            border: 1px solid cornflowerblue;
-            color: cornflowerblue;
-            width: auto; /* Ajusta el ancho automático */
-            margin-right: 10px; /* Espacio entre botones */
-        }
-
-        .botones-comprar-container {
-            display: flex; /* Flexbox para alinear botones en la misma línea */
-            justify-content: center; /* Alinea los botones a la izquierda */
-        }
-
-        .boton_entradas:hover {
-            background-image: url('../imagenes/ticketnegro.png');
-            background-color: cornflowerblue;
-            color: black;
-        }
-
-        .boton_entradas_obra{
-            height: 6vh;
-            border-radius: 0;
-            background-color: transparent;
-            border: 1px solid rgb(255, 0, 0);
-            color: rgb(255, 0, 0);
-            width: auto; /* Ajusta el ancho automático */
-            margin-right: 10px; /* Espacio entre botones */
-        }
-
-        .boton_entradas_obra:hover{
-            background-image: url('../imagenes/ticketnegro.png');
-            background-color: rgb(255, 0, 0);
-            color: rgb(0, 0, 0);
-        }
-
-        .boton_entradas_obra_crear{
-            height: 6vh;
-            border-radius: 0;
-            background-color: rgb(0, 255, 0);
-            border: 1px solid rgb(0, 0, 0);
-            color: rgb(0, 0, 0);
-            width: auto; /* Ajusta el ancho automático */
-            margin-right: 10px; /* Espacio entre botones */
-        }
-    </style>
-    <title>Editar Obra</title>
-</head>
-<body style="background-color: #fbf2d5;">
+<x-app-layout>
     <div class="container d-flex flex-column align-items-center justify-content-center" style="height: 100vh;">
         <h1 class="mb-4">Editar obra</h1>
         <div class="card" style="width: 34rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
@@ -163,7 +12,7 @@
                     <!-- Nombre -->
                     <div class="mb-3">
                         <p style="font-size: 20px">Nombre</p>
-                        <x-text-input id="nombre" value="{{$obra->nombre}}" class="block mt-1 w-full" type="nombre" name="nombre"  required autofocus autocomplete="nombre" />
+                        <x-text-input id="nombre" value="{{$obra->nombre}}" class="block mt-1 w-full" type="nombre" name="nombre" required autofocus autocomplete="nombre" />
                         <x-input-error :messages="$errors->get('nombre')" class="mt-2" />
                     </div>
 
@@ -177,7 +26,7 @@
                     <!-- Artista -->
                     <div class="mb-3">
                         <p style="font-size: 20px">Artista</p>
-                        <x-text-input id="artista" class="block mt-1 w-full" value="{{$obra->artista}}" type="artista" name="artista" required autocomplete="artista" />
+                        <x-text-input id="artista" value="{{$obra->artista}}" class="block mt-1 w-full" type="artista" name="artista" required autocomplete="artista" />
                         <x-input-error :messages="$errors->get('artista')" class="mt-2" />
                     </div>
 
@@ -191,12 +40,29 @@
                     <!-- Foto -->
                     <div class="mb-3">
                         <p style="font-size: 20px">Foto de la obra</p>
-                        <x-text-input id="foto" value="{{$obra->foto}}" class="block mt-1 w-full" type="file" name="foto" required autocomplete="foto" />
+                        <x-text-input id="foto" value="{{$obra->foto}}" class="block mt-1 w-full" type="file" name="foto" autocomplete="foto" />
                         <x-input-error :messages="$errors->get('foto')" class="mt-2" />
                     </div>
+
+                    <!-- Exposiciones -->
+                    <div class="mb-3">
+                        <p style="font-size: 20px">Seleccionar exposiciones</p>
+                        @foreach ($exposiciones as $exposicion)
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="exposicion_{{ $exposicion->id }}" name="exposiciones[]" value="{{ $exposicion->id }}" {{ $obra->exposiciones->contains($exposicion->id) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="exposicion_{{ $exposicion->id }}">
+                                    {{ $exposicion->nombre }}
+                                </label>
+                            </div>
+                        @endforeach
+                    </div>
+
                     <div class="mt-5">
-                        <input value="Actualizar obra" type="submit" class="boton_entradas btn btn-lg"></input>
-                        <button value="Volver" class="boton_entradas btn btn-lg" onclick="window.location.href='{{ route('listar_obras') }}'">Volver</button>
+                        <input value="Actualizar obra" type="submit" class="boton_entradas_editobra btn btn-lg"></input>
+                        <button value="Volver" class="boton_entradas_editobra btn btn-lg" onclick="window.location.href='{{ route('listar_obras') }}'">Volver</button>
                     </div>
                 </form>
             </div>
+        </div>
+    </div>
+</x-app-layout>

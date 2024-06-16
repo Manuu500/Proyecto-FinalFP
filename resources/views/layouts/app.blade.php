@@ -33,7 +33,7 @@
      'resources/css/listarobras.css', 'resources/css/index.css', 'resources/css/entradas.css', 'resources/css/entradasadquiridas.css',
      'resources/css/gestionusuarios.css', 'resources/css/listarexposiciones.css','resources/css/login.css','resources/css/register.css',
      'resources/css/editarusuario.css', 'resources/css/comprarentradas.css', 'resources/css/editarexposicion.css', 'resources/css/crearexposicion.css',
-     'resources/css/añadirusuario.css'])
+     'resources/css/añadirusuario.css', 'resources/css/crearobra.css','resources/css/editarobra.css'])
 
         <style>
 
