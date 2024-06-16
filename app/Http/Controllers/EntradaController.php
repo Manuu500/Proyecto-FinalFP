@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Entrada;
+use App\Models\Exposicion;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use App\Models\TipoEntrada;
@@ -19,6 +20,42 @@ class EntradaController extends Controller
     public function index(){
         $tiposEntradas = TipoEntrada::all(); // Fetch all ticket types
         return view('entradas', compact('tiposEntradas'));
+    }
+
+    public function seleccionarEntrada($id)
+    {
+         // Obtener el ID del usuario autenticado
+    $idUsuario = auth()->user()->id;
+
+    // Recuperar todas las entradas del usuario con ese ID
+    $entradas = Entrada::where('user_id', $idUsuario)
+                        ->with('tipoEntrada') // Cargar la relación tipoEntrada
+                        ->get();
+
+
+    return view('seleccionar_entrada', compact('entradas', 'id'));
+    }
+
+    public function procesarSeleccion(Request $request, $idExpo)
+    {
+        $request->validate([
+            'entrada_id' => 'required|exists:entrada,id',
+        ]);
+
+        $entrada = Entrada::findOrFail($request->entrada_id);
+
+        // dd($entrada);
+        // Obtener la exposición asociada a la entrada
+        $exposicion = Exposicion::findOrFail($idExpo);
+
+        // dd($exposicion);
+
+        // Actualizar la fecha_hora_visita de la entrada
+        $entrada->fecha_hora_visita = $exposicion->fecha_inicio;
+        $entrada->save();
+
+        // Redirigir a la lista de exposiciones
+        return redirect()->route('listar_exposiciones')->with('success', 'Entrada seleccionada y fecha de visita actualizada correctamente.');
     }
 
     public function comprar_entradas($id){

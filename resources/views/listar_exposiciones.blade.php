@@ -81,8 +81,13 @@
                                             <button class="btn btn-primary btn-lg" onclick="window.location.href='{{ route('expo.edit', ['id' => $exposicion->id]) }}'">Editar</button>
                                             @endif
                                         @endif
-                                    @else
-                                        <button class="btn btn-success btn-lg" onclick="window.location.href='{{ route('login') }}'">Comprar la entrada</button>
+                                        <form action="{{ route('seleccionar_entrada', $exposicion->id) }}" method="GET" class="d-inline-block">
+                                            @csrf
+                                            {{-- <input type="hidden" name="exposicion_id" value="{{ $exposicion->id }}"> --}}
+                                            <button type="submit" class="btn btn-success btn-lg">Reservar la entrada</button>
+                                        </form>
+                                        @else
+                                        <button class="btn btn-success btn-lg" onclick="window.location.href='{{ route('login') }}'">Reservar la entrada</button>
                                     @endif
                                 </div>
                             </div>

@@ -20,6 +20,11 @@ Route::get('/entradas' , function () {
      return view('entradas');
 })->name('entradas');
 
+Route::get('/seleccionar_entrada/{id}', [EntradaController::class, 'seleccionarEntrada'])
+    ->name('seleccionar_entrada');
+
+    Route::post('/listar_exposiciones/{idExpo}', [EntradaController::class, 'procesarSeleccion'])->name('procesar_seleccion');
+
 // Route::get('/comprar_entradas' , function () {
 //     return view('comprar_entradas');
 // })->name('comprar_entradas')->middleware('auth');
