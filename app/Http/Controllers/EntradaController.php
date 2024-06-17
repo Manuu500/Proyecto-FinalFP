@@ -28,13 +28,13 @@ class EntradaController extends Controller
     $idUsuario = auth()->user()->id;
 
     // Recuperar todas las entradas del usuario con ese ID
-    $entradas = Entrada::where('user_id', $idUsuario)
-                        ->with('tipoEntrada') // Cargar la relación tipoEntrada
-                        ->get();
+    $entradas = Entrada::where('user_id', $idUsuario)->with('tipoEntrada') ->get();
 
 
     return view('seleccionar_entrada', compact('entradas', 'id'));
     }
+
+
 
     public function procesarSeleccion(Request $request, $idExpo)
     {
@@ -45,17 +45,20 @@ class EntradaController extends Controller
         $entrada = Entrada::findOrFail($request->entrada_id);
 
         // dd($entrada);
-        // Obtener la exposición asociada a la entrada
         $exposicion = Exposicion::findOrFail($idExpo);
 
         // dd($exposicion);
 
-        // Actualizar la fecha_hora_visita de la entrada
         $entrada->fecha_hora_visita = $exposicion->fecha_inicio;
         $entrada->save();
 
-        // Redirigir a la lista de exposiciones
         return redirect()->route('listar_exposiciones')->with('success', 'Entrada seleccionada y fecha de visita actualizada correctamente.');
+    }
+
+    public function comprarEntradas2(Request $request, $idExpo){
+        $exposicion = Exposicion::findOrFail($idExpo);
+        return view('comprar_entradas2', compact('exposicion'));
+
     }
 
     public function comprar_entradas($id){
@@ -93,6 +96,24 @@ class EntradaController extends Controller
             ]);
         }
         return redirect()->route('index')->with('success', 'Compra realizada con éxito');
+    }
+
+    public function updateExpo(Request $request)
+    {
+        try{
+            $busqueda = DB::table('entrada')->latest('id')->first()->id;
+            // dd($entrada);
+            $entrada = Entrada::findOrFail($busqueda);
+            // dd($entrada);
+
+            $entrada->fecha_hora_visita = $request->fecha_visita;
+
+            $entrada->save();
+
+            return view('index')->with('success','La exposición ha sido reservada');
+        }catch(QueryException $e){
+            dd($e);
+        }
     }
 
     public function ver_entradas($id){

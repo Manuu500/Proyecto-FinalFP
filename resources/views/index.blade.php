@@ -8,7 +8,7 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-body">
-                    Bienvenido <strong>{{ session('success') }}</strong>!
+                   <strong>{{ session('success') }}</strong>
                 </div>
                 <button id="botonCerrarModal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
               </div>

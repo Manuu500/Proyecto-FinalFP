@@ -91,6 +91,8 @@ Route::get('/listar_obras', [ObrasController::class, 'index'])->name('listar_obr
 
 //Ruta para comprar las entradas
 Route::post('/guardar-entrada', [EntradaController::class, 'store'])->name('entradas.store');
+Route::post('/listar_exposicion', [EntradaController::class, 'updateExpo'])->name('entradasExpo.store');
+
 
 //Ruta para guardar obras
 Route::post('/obras', [ObrasController::class, 'store'])->name('obras.store');
@@ -116,6 +118,9 @@ Route::put('/user/{id}', [UserController::class, 'update'])->middleware('admin')
 //Ruta para coger los tipos de entradas
 Route::get('/entradas', [EntradaController::class, 'index'])->name('entradas');
 Route::get('/comprar_entradas/{tipoEntrada}/{precio}', [EntradaController::class, 'comprar_entradas'])->name('comprar_entradas');
+Route::get('/comprar_entradas2/{exposicion}', [EntradaController::class, 'comprarEntradas2'])->name('comprar_entradas2');
+
+
 
 //Ruta para ir al sobre nosotros
 Route::get('/sobrenosotros' , function () {
