@@ -39,11 +39,11 @@
                                     </div>
                                     <div id="campoTarjeta" class="mb-3" style="display: none;">
                                         <h4>Número de tarjeta:</h4>
-                                        <input type="text" name="numero_tarjeta" class="form-control">
+                                        <input type="text" name="numero_tarjeta" class="form-control" pattern="[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}" placeholder="XXXX-XXXX-XXXX-XXXX" title="Por favor, introduce un número de tarjeta válido en el formato XXXX-XXXX-XXXX-XXXX" maxlength="19" required>
                                         <h4>Fecha de caducidad:</h4>
-                                        <input type="text" name="fecha_caducidad" class="form-control">
+                                        <input type="text" name="fecha_caducidad" class="form-control" pattern="(0[1-9]|1[0-2])\/[0-9]{2}" maxlength="5" placeholder="MM/AA" required>
                                         <h4>CVV:</h4>
-                                        <input type="text" name="cvv" class="form-control">
+                                        <input type="text" name="cvv" class="form-control" pattern="[0-9]{3}" placeholder="XXX" maxlength="3" required>
                                     </div>
                                     <input style="" type="submit" class="boton_entradas_comprar btn btn-lg" value="Comprar">
                                     <label><b>Precio:</b> {{$entrada->precio}}$</label>
