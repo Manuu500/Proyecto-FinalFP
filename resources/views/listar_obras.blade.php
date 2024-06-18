@@ -6,16 +6,10 @@
         <div class="modal fade" id="bienvenidaModal" tabindex="-1" aria-labelledby="bienvenidaModalLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="bienvenidaModalLabel">Bienvenido</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
                 <div class="modal-body">
                     {{ session('success') }}
                 </div>
-                <div class="modal-footer">
                   <button id="botonCerrarModal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                </div>
               </div>
             </div>
         </div>
@@ -76,13 +70,17 @@
                             </div>
 
                             <div class="row">
-                                <p class="text-center">Fecha de creación: {{ $obra->fecha_creacion }}</p>
+                                <p class="text-center"><strong>Fecha de creación:</strong> {{ $obra->fecha_creacion }}</p>
                             </div>
                             <div class="row">
-                                <p class="text-center">Esta obra está disponible en las exposiciones:</p>
-                                    @foreach ($obra->exposiciones as $exposicion)
-                                        {{ $exposicion->nombre }},
-                                    @endforeach
+                                <div class="text-center">
+                                    <strong>Esta obra está disponible en las exposiciones:</strong>
+                                    <p>
+                                        @foreach ($obra->exposiciones as $exposicion)
+                                            {{ $exposicion->nombre }}@if (!$loop->last), @endif
+                                        @endforeach
+                                    </p>
+                                </div>
                             </div>
                             <div class="row botones-comprar-container">
                                 @auth

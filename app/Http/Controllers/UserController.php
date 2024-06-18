@@ -96,7 +96,7 @@ class UserController extends Controller
     {
         try{
             $request->validate([
-            'dni' => ['required', 'string', 'size:9', 'regex:/^[0-9]{8}[A-Z]$/', 'unique:users,dni'],
+            'dni' => ['required', 'string', 'size:9', 'regex:/^[0-9]{8}[A-Z]$/'],
             'nombre' => ['required', 'string', 'max:255'],
             'apellido1' => ['required', 'string', 'max:255'],
             'apellido2' => ['required', 'string', 'max:255'],
