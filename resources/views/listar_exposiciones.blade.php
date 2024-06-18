@@ -6,16 +6,10 @@
         <div class="modal fade" id="bienvenidaModal" tabindex="-1" aria-labelledby="bienvenidaModalLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="bienvenidaModalLabel">Bienvenido</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
                 <div class="modal-body">
                     {{ session('success') }}
                 </div>
-                <div class="modal-footer">
                   <button id="botonCerrarModal" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                </div>
               </div>
             </div>
         </div>
@@ -60,6 +54,12 @@
                                 <h2 class="color-letra text-center mb-3">{{ $exposicion->nombre }}</h2>
                                 <div class="text-center mb-4">
                                     <p class="text-center mb-0">{{ $exposicion->descripcion }}</p>
+                                </div>
+                                <div class="text-center mb-4">
+                                    <p class="text-center mb-0"><strong>Fecha de inicio:</strong> {{ $exposicion->fecha_inicio }}</p>
+                                </div>
+                                <div class="text-center mb-4">
+                                    <p class="text-center mb-0"><strong>Aforo:</strong> {{ $exposicion->aforo }} personas</p>
                                 </div>
                                 <div class="text-center">
                                     @if (Auth::check())

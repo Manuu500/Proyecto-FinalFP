@@ -69,11 +69,11 @@
                                 <p class="text-center"><strong>El artista:</strong> {{ $obra->artista }}</p>
                             </div>
 
-                            <div class="row">
-                                <p class="text-center"><strong>Fecha de creación:</strong> {{ $obra->fecha_creacion }}</p>
+                            <div class="text-center">
+                                <strong>Fecha de creación:</strong> {{ \DateTime::createFromFormat('Y-m-d', $obra->fecha_creacion)->format('Y') }}
                             </div>
                             <div class="row">
-                                <div class="text-center">
+                                <div class=" mt-3 text-center">
                                     <strong>Esta obra está disponible en las exposiciones:</strong>
                                     <p>
                                         @foreach ($obra->exposiciones as $exposicion)
